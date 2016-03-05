@@ -138,12 +138,12 @@ a.thumbnail.active,
 a.list-group-item-success.active,
 hr.star-light:after,
 .btn:hover {
-    background-color: #1D90CD;
+    background-color: #6B554C;
 }
 
 header,
 section.success {
-    background: #1D90CD;
+    background: #6B554C;
 }
 
 .btn-lg,
@@ -176,20 +176,20 @@ fieldset[disabled] .btn-success:hover,
 .panel-success,
 .panel-success > .panel-heading,
 .has-success .input-group-addon {
-    border-color: #1D90CD;
+    border-color: #6B554C;
 }
 
 .panel-success > .panel-heading + .panel-collapse > .panel-body {
-    border-top-color: #1D90CD;
+    border-top-color: #6B554C;
 }
 
 .panel-success > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #1D90CD;
+    border-bottom-color: #6B554C;
 }
 
 .has-success .form-control,
 .has-success .form-control:focus {
-    border: 2px solid #1D90CD;
+    border: 2px solid #6B554C;
 }
 
 a,
@@ -235,11 +235,11 @@ a.active,
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus,
 section.success .btn:hover {
-    color: #1D90CD;
+    color: #6B554C;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption {
-    background: rgba(29, 144, 205, .8);
+    background: rgba(139, 0, 0, .8);
 }
 
 a.text-primary:hover,
@@ -247,7 +247,7 @@ a.text-primary:focus,
 a.bg-primary:hover,
 a.bg-primary:focus,
 a.btn-primary:focus {
-  color: #188BC8;
+  color: #665047;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -259,27 +259,27 @@ a.btn-primary:focus {
 .navbar-default .navbar-nav > .open > a:focus,
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-  background-color: #188BC8;
+  background-color: #665047;
 }
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    background-color: #188BC8;
+    background-color: #665047;
   }
 }
 
 .navbar-default .navbar-toggle {
-  border-color: #188BC8;
+  border-color: #665047;
 }
 
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #188BC8;
-  border-color: #1386C3;
+  background-color: #665047;
+  border-color: #614B42;
 }
 
 section.success a,
@@ -303,6 +303,6 @@ section.success .btn-outline:hover {
 
 section.success .btn-outline:focus,
 section.success .btn-outline:active {
-    color: #1D90CD;
+    color: #6B554C;
 }
 

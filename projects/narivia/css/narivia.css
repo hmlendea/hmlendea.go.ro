@@ -301,3 +301,8 @@ section.success .btn-outline:hover {
     background-color: #FFF;
 }
 
+section.success .btn-outline:focus,
+section.success .btn-outline:active {
+    color: #8B0000;
+}
+
