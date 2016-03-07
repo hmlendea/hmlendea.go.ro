@@ -306,3 +306,18 @@ section.success .btn-outline:active {
     color: #6B554C;
 }
 
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color: #CDCDCD;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #FFFFFF;
+}
+
