@@ -17,6 +17,7 @@
 
     <!-- CSS - Themes -->
     <link href="css/freelancer.css" rel="stylesheet">
+    <link href="css/portfolio-filter.css" rel="stylesheet">
     <link href="css/hori.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -76,6 +77,51 @@
                     <hr class="star-primary">
                 </div>
             </div>
+			<div class="row text-center toolbar mb2 mt2">
+			  <button class="btn fil-cat" href="" data-rel="portfolio-filter-all">All</button>
+			  <button class="btn fil-cat" data-rel="portfolio-filter-games">Games</button>
+			  <button class="btn fil-cat" data-rel="portfolio-filter-tools">Tools</button>
+			</div>
+			
+			<div id="portfolio-gallery">
+				<div class="portfolio-item scale-anm portfolio-filter-games portfolio-filter-all">
+                    <a href="projects/narivia/" class="portfolio-link">
+                        <div class="caption"><div class="caption-content">Narivia</div></div>
+						<img src="projects/narivia/img/portfolio.png" class="img-responsive" alt="Narivia" />
+					</a>
+				</div>
+				<div class="portfolio-item scale-anm portfolio-filter-games portfolio-filter-all">
+                    <a href="projects/sokogrump/" class="portfolio-link" data-toggle="modal">
+                        <div class="caption"><div class="caption-content">Sokogrump</div></div>
+						<img src="projects/sokogrump/img/portfolio.png" class="img-responsive" alt="Sokogrump" />
+					</a>
+				</div>
+				<div class="portfolio-item scale-anm portfolio-filter-games portfolio-filter-all">
+                    <a href="#portfolio-MineSweeper" class="portfolio-link" data-toggle="modal">
+                        <div class="caption"><div class="caption-content">Minesweeper</div></div>
+						<img src="img/portfolio/minesweeper.png" class="img-responsive" alt="Minesweeper" />
+					</a>
+				</div>
+				<div class="portfolio-item scale-anm portfolio-filter-games portfolio-filter-all">
+                    <a href="projects/memoryblocks/" class="portfolio-link" data-toggle="modal">
+                        <div class="caption"><div class="caption-content">Memory Blocks</div></div>
+						<img src="projects/memoryblocks/img/portfolio.png" class="img-responsive" alt="Memory Blocks" />
+					</a>
+				</div>
+				<div class="portfolio-item scale-anm portfolio-filter-games portfolio-filter-all">
+                    <a href="projects/backgammon/" class="portfolio-link" data-toggle="modal">
+                        <div class="caption"><div class="caption-content">Backgammon by Horațiu</div></div>
+						<img src="projects/backgammon//img/portfolio.png" class="img-responsive" alt="Backgammon" />
+					</a>
+				</div>
+				<div class="portfolio-item scale-anm portfolio-filter-tools portfolio-filter-all">
+                    <a href="projects/ung/" class="portfolio-link" data-toggle="modal">
+                        <div class="caption"><div class="caption-content">Universal Name Generator</div></div>
+						<img src="projects/ung/img/portfolio.png" class="img-responsive" alt="Universal Name Generator" />
+					</a>
+				</div>
+			</div>
+			<!--
             <div class="row">
                 <div class="col-sm-4 portfolio-item">
                     <a href="projects/narivia/" class="portfolio-link">
@@ -119,6 +165,7 @@
                     </a>
                 </div>
             </div>
+			-->
         </div>
     </section>
 
@@ -312,6 +359,7 @@
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/classie.js"></script>
     <script src="js/cbpAnimatedHeader.min.js"></script>
+    <script src="js/portfolio-filter.js"></script>
 
     <!-- JS Custom Themes -->
     <script src="js/freelancer.js"></script>
