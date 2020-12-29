@@ -16,3 +16,7 @@ feature-box {
 .feature-box p {
     margin-bottom: 0;
 }
+
+.profile-picture {
+    border-radius: 50%;
+}
