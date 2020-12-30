@@ -1,5 +1,8 @@
-#contact > div > div > div.col-lg-4.ml-auto > p,
-#contact > div > div > div.col-lg-4.mr-auto > p {
+#about > div > div.row > div > p  {
+    font-size: large;
+}
+
+#contact > div > div > div > p {
     font-size: x-large;
 }
 
