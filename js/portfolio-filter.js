@@ -5,17 +5,17 @@ $(document).ready(function(){
         
         if(value == "all")
         {
-            //$('.filter').removeClass('hidden');
             $('.filter').show('1000');
         }
         else
         {
-//            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
-//            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
             $(".filter").not('.'+value).hide('3000');
             $('.filter').filter('.'+value).show('3000');
             
         }
+
+        $(".filter-button").removeClass('btn-primary');
+        $("button[data-filter='" + value + "']").addClass('btn-primary');
     });
     
     if ($(".filter-button").removeClass("active")) {
