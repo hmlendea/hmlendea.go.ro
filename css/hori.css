@@ -7,12 +7,16 @@
     font-size: x-large;
 }
 
-#contact > div > div > div.col-lg-4.mr-auto > p > a {
+#contact > div > div > div.col-lg-4.me-auto > p > a {
     color: #FFF;
 }
 
 .masthead-avatar {
     border-radius: 50%;
+}
+
+.typewrite > .wrap {
+    border-right: 0.08em solid #fff;
 }
 
 .icoDeviantArt:hover { color: #05CC47; }

@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Mlendea Horatiu Presentation Website">
         <meta name="author" content="Mlendea Horatiu">
@@ -11,34 +10,29 @@
         <link rel="icon" href="https://avatars.githubusercontent.com/u/10261133">
         <title>Mlendea Horațiu</title>
 
-        <!-- JQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.12.1/jquery.easing.min.js"></script>
+        <!-- Preconnect hints for performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
         <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-        <link href="https://startbootstrap.github.io/startbootstrap-freelancer/css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/startbootstrap-freelancer@7.0.7/dist/css/styles.min.css" rel="stylesheet" />
 
-        <!-- JS Plugins -->
-        <script src="js/cbpAnimatedHeader.js"></script>
-        <script src="js/portfolio-filter.js"></script>
-        <script src="js/typewriter.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <!-- Font Awesome icons (free version)-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
 
         <!-- CSS - Plugins -->
         <link href="css/timeline.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
         <!-- CSS - Customisations -->
+        <link href="css/portfolio-filter.css" rel="stylesheet">
         <link href="css/hori.css" rel="stylesheet">
 
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.2.1/js/all.js" crossorigin="anonymous"></script>
-
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
     </head>
     <body id="page-top" class="index">
         <a rel="me" href="https://mastodon.world/@hmlendea">Mastodon</a>
@@ -47,12 +41,12 @@
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">Mlendea Horațiu</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler text-uppercase fw-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#timeline">Timeline</a></li>
@@ -77,7 +71,7 @@
                 </div>
                 <!-- Masthead Subheading-->
                 <span class="skills">
-                    <p class="text-center typewrite" data-period="2000" data-type='[ ".NET Developer", "Tinkerer", "IoT enthusiast", "♥ Linux", "Gamer", "Open-source contributor", "Writer of bugs xD" ]'>
+                    <p class="text-center typewrite" data-period="1500" data-type='[ ".NET Developer", "Tinkerer", "IoT enthusiast", "♥ Linux", "Gamer", "Open-source contributor", "Online privacy advocate", "Writer of bugs xD" ]'>
                         <span class="wrap"></span>
                     </p>
                 </span>
@@ -107,7 +101,7 @@
                     <!-- 1,1 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter games highlights">
                         <!-- Narivia-->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalNarivia">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalNarivia">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Narivia</div>
                             </div>
@@ -117,7 +111,7 @@
                     <!-- 2,1 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter mods highlights">
                         <!-- More Cultural Names -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalMoreCulturalNames">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalMoreCulturalNames">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">More Cultural Names</div>
                             </div>
@@ -127,7 +121,7 @@
                     <!-- 3,1 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter tools highlights">
                         <!-- GeForce NOW for Linux -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalGeForceNowElectron">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalGeForceNowElectron">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">GeForce NOW for Linux</div>
                             </div>
@@ -137,7 +131,7 @@
                     <!-- 1,2 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter tools highlights">
                         <!-- IPTV Playlist Aggregator-->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalIptvPlaylistAggregator">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalIptvPlaylistAggregator">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">IPTV Playlist Aggregator</div>
                             </div>
@@ -147,7 +141,7 @@
                     <!-- 2,2 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter tools highlights">
                         <!-- Universal Name Generator -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalUniversalNameGenerator">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalUniversalNameGenerator">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Universal Name Generator</div>
                             </div>
@@ -157,7 +151,7 @@
                     <!-- 3,2 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter tools highlights">
                         <!-- Duolingo Desktop -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalDuolingoDesktop">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalDuolingoDesktop">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Duolingo Desktop</div>
                             </div>
@@ -167,7 +161,7 @@
                     <!-- 1,3 -->
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-0 wow animate__animated animate__bounceIn filter tools">
                         <!-- Bitwarden Vault Manager -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalBitwardenVaultManager">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalBitwardenVaultManager">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Bitwarden Vault Manager</div>
                             </div>
@@ -177,7 +171,7 @@
                     <!-- 2,3 -->
                     <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter tools">
                         <!-- Transliteration API -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalTransliterationAPI">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalTransliterationAPI">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Transliteration API</div>
                             </div>
@@ -187,7 +181,7 @@
                     <!-- 1,4 -->
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-0 wow animate__animated animate__bounceIn filter games">
                         <!-- Memory Blocks -->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalMemoryBlocks">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalMemoryBlocks">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Memory Blocks</div>
                             </div>
@@ -197,7 +191,7 @@
                     <!-- 2,4 -->
                     <div class="col-md-6 col-lg-4 mb-5 mb-md-0 wow animate__animated animate__bounceIn filter games">
                         <!-- SokoGrump-->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalSokoGrump">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalSokoGrump">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">SokoGrump</div>
                             </div>
@@ -207,7 +201,7 @@
                     <!-- 3,4 -->
                     <div class="col-md-6 col-lg-4 wow animate__animated animate__bounceIn filter games">
                         <!-- Minesweeper-->
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalMinesweeper">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalMinesweeper">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">Minesweeper</div>
                             </div>
@@ -231,11 +225,11 @@
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ml-auto wow animate__animated animate__slideInLeft">
+                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
                         <p>I am a software engineer with a keen interest in Linux and open-source software.</p>
                         <p>I'm a proactive and dedicated team player with a strong desire to take on new challenges and learn from them.</p>
                     </div>
-                    <div class="col-lg-4 mr-auto wow animate__animated animate__slideInRight">
+                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
                         <p>I also actively contribute to open-source projects and am constantly seeking ways to enhance my skills and knowledge.</p>
                         <p>In my spare time, I enjoy indulging in my favorite pastimes, such as watching movies and TV shows, playing video games, and listening to audiobooks.</p>
                     </div>
@@ -371,26 +365,26 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 ml-auto wow animate__animated animate__slideInLeft">
+                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
                         <p><i class="fas fa-fw fa-envelope"></i> Email Address:</p>
                     </div>
-                    <div class="col-lg-4 mr-auto wow animate__animated animate__slideInRight">
+                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
                         <p><a href="mailto:Horatiu.Mlendea.Inado@Aleeas.com">Horatiu.Mlendea.Inado@Aleeas.com</a></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 ml-auto wow animate__animated animate__slideInLeft">
+                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
                         <p><i class="fas fa-fw fa-phone"></i> Phone:</p>
                     </div>
-                    <div class="col-lg-4 mr-auto wow animate__animated animate__slideInRight">
+                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
                         <p><a href="https://signal.me/#eu/KWtk5ma9sJDxwGG6XL2z2UsvLSzDA_91WQb9ejQx4FaVi4dY1nZOn5ujWWV-z7Ya">@hori.873 (Signal)</a></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 ml-auto wow animate__animated animate__slideInLeft">
+                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
                         <p><i class="fas fa-fw fa-map-marker"></i> Location:</p>
                     </div>
-                    <div class="col-lg-4 mr-auto wow animate__animated animate__slideInRight">
+                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
                         <p><a href="https://goo.gl/maps/WRiFBEmSpfjrB4hP6">Cluj-Napoca, Romania</a></p>
                     </div>
                 </div>
@@ -435,11 +429,9 @@
 
         <!-- Portfolio Modal: Backgammon-->
         <div class="portfolio-modal modal fade" id="portfolioModalBackgammon" tabindex="-1" role="dialog" aria-labelledby="portfolioModalBackgammonLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -485,7 +477,7 @@
                                         <li>Operating Systems: <strong>Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -499,11 +491,9 @@
 
         <!-- Portfolio Modal: Bitwarden Vault Manager -->
         <div class="portfolio-modal modal fade" id="portfolioModalBitwardenVaultManager" tabindex="-1" role="dialog" aria-labelledby="portfolioModalBitwardenVaultManagerLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -531,7 +521,7 @@
                                         <li>Operating Systems: <strong>Windows, Mac, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -545,11 +535,9 @@
 
         <!-- Portfolio Modal: Duolingo Desktop -->
         <div class="portfolio-modal modal fade" id="portfolioModalDuolingoDesktop" tabindex="-1" role="dialog" aria-labelledby="portfolioModalDuolingoDesktopLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -581,7 +569,7 @@
                                         <li>Operating Systems: <strong>Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -595,11 +583,9 @@
 
         <!-- Portfolio Modal: GeForce NOW for Linux-->
         <div class="portfolio-modal modal fade" id="portfolioModalGeForceNowElectron" tabindex="-1" role="dialog" aria-labelledby="portfolioModalGeForceNowElectronLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -631,7 +617,7 @@
                                         <li>Operating Systems: <strong>Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -645,11 +631,9 @@
 
         <!-- Portfolio Modal: IPTV Playlist Aggregator -->
         <div class="portfolio-modal modal fade" id="portfolioModalIptvPlaylistAggregator" tabindex="-1" role="dialog" aria-labelledby="portfolioModalIptvPlaylistAggregatorLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -705,7 +689,7 @@
                                         <li>Architectures: <strong>x86_64, ARM, ARM64</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -719,11 +703,9 @@
 
         <!-- Portfolio Modal: Memory Blocks-->
         <div class="portfolio-modal modal fade" id="portfolioModalMemoryBlocks" tabindex="-1" role="dialog" aria-labelledby="portfolioModalMemoryBlocksLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -774,7 +756,7 @@
                                         <li>Operating Systems: <strong>Windows, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -788,11 +770,9 @@
 
         <!-- Portfolio Modal: Minesweeper-->
         <div class="portfolio-modal modal fade" id="portfolioModalMinesweeper" tabindex="-1" role="dialog" aria-labelledby="portfolioModalMinesweeperLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -827,7 +807,7 @@
                                         <li>Operating Systems: <strong>Windows, Mac, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -841,11 +821,9 @@
 
         <!-- Portfolio Modal: More Cultural Names-->
         <div class="portfolio-modal modal fade" id="portfolioModalMoreCulturalNames" tabindex="-1" role="dialog" aria-labelledby="portfolioModalMoreCulturalNamesLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -909,7 +887,7 @@
                                         <li>Imperator: Rome</li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -923,11 +901,9 @@
 
         <!-- Portfolio Modal: Narivia-->
         <div class="portfolio-modal modal fade" id="portfolioModalNarivia" tabindex="-1" role="dialog" aria-labelledby="portfolioModalNariviaLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -983,7 +959,7 @@
                                         <li>Operating Systems: <strong>Windows, Mac, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -997,11 +973,9 @@
 
         <!-- Portfolio Modal: SokoGrump-->
         <div class="portfolio-modal modal fade" id="portfolioModalSokoGrump" tabindex="-1" role="dialog" aria-labelledby="portfolioModalSokoGrumpLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -1049,7 +1023,7 @@
                                         <li>Operating Systems: <strong>Windows, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -1063,11 +1037,9 @@
 
         <!-- Portfolio Modal: Transliteration API -->
         <div class="portfolio-modal modal fade" id="portfolioModalTransliterationAPI" tabindex="-1" role="dialog" aria-labelledby="portfolioModalTransliterationAPILabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -1104,7 +1076,7 @@
                                         <li>Operating Systems: <strong>Windows, Mac, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -1118,11 +1090,9 @@
 
         <!-- Portfolio Modal: Universal Name Generator -->
         <div class="portfolio-modal modal fade" id="portfolioModalUniversalNameGenerator" tabindex="-1" role="dialog" aria-labelledby="portfolioModalUniversalNameGeneratorLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body text-center">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -1173,7 +1143,7 @@
                                         <li>Operating Systems: <strong>Windows, Mac, Linux</strong></li>
                                     </ul>
                                     <br>
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -1185,7 +1155,18 @@
             </div>
         </div>
 
-        <script src="https://startbootstrap.github.io/startbootstrap-freelancer/js/scripts.js"></script>
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.12.1/jquery.easing.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Plugins -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <!-- Theme -->
+        <script src="https://cdn.jsdelivr.net/npm/startbootstrap-freelancer@7.0.7/dist/js/scripts.min.js"></script>
+        <!-- Custom -->
+        <script src="js/portfolio-filter.js"></script>
+        <script src="js/typewriter.js"></script>
         <script src="js/hori.js"></script>
     </body>
 </html>

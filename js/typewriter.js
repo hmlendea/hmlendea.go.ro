@@ -3,7 +3,7 @@ var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
     this.loopNum = 0;
-    this.period = parseInt(period, 10) || 2000;
+    this.period = parseInt(period, 10) || 1500;
     this.txt = '';
     this.tick();
     this.isDeleting = false;
@@ -22,17 +22,17 @@ TxtType.prototype.tick = function() {
     this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
 
     var that = this;
-    var delta = 200 - Math.random() * 100;
+    var delta = 60 - Math.random() * 20;
 
     if (this.isDeleting) { delta /= 2; }
 
     if (!this.isDeleting && this.txt === fullTxt) {
-    delta = this.period;
-    this.isDeleting = true;
+        delta = this.period;
+        this.isDeleting = true;
     } else if (this.isDeleting && this.txt === '') {
-    this.isDeleting = false;
-    this.loopNum++;
-    delta = 500;
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 200;
     }
 
     setTimeout(function() {
@@ -40,7 +40,8 @@ TxtType.prototype.tick = function() {
     }, delta);
 };
 
-window.onload = function() {
+// Script is loaded at end of <body>, so DOM is already ready — no event wrapper needed.
+(function() {
     var elements = document.getElementsByClassName('typewrite');
     for (var i=0; i<elements.length; i++) {
         var toRotate = elements[i].getAttribute('data-type');
@@ -49,9 +50,4 @@ window.onload = function() {
           new TxtType(elements[i], JSON.parse(toRotate), period);
         }
     }
-    // INJECT CSS
-    var css = document.createElement("style");
-    css.type = "text/css";
-    css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-    document.body.appendChild(css);
-};
+})();
