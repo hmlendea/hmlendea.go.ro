@@ -108,6 +108,20 @@
     font-size: large;
 }
 
+/* Safety net: if WOW.js never ran, .wow elements should not stay invisible */
+body.wowjs-active .wow {
+    /* WOW.js adds this class to <body> on init — elements are managed by WOW */
+}
+
+/* Reduced-motion: skip all scroll animations and ensure everything is visible */
+@media (prefers-reduced-motion: reduce) {
+    .wow {
+        visibility: visible !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 .typewrite,
 #contact > div > div > div > p {
     font-size: x-large;
