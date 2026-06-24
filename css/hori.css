@@ -24,6 +24,7 @@
 
 .skill-tag {
     display: inline-block;
+    position: relative;
     background-color: #1D7F5E;
     color: #fff;
     border-radius: 50px;
@@ -31,11 +32,75 @@
     font-size: 0.82rem;
     font-weight: 500;
     white-space: nowrap;
+    cursor: default;
 }
 
 .skill-tag-note {
     opacity: 0.8;
     font-size: 0.78em;
+}
+
+.skill-popup {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #333;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    width: 215px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    pointer-events: none;
+    white-space: normal;
+    text-align: left;
+    font-weight: 400;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.skill-popup::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.skill-tag:hover .skill-popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.skill-popup-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #1D7F5E;
+    margin-bottom: 0.3rem;
+}
+
+.skill-popup-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: #555;
+    line-height: 1.45;
+    margin-bottom: 0.45rem;
+}
+
+.skill-popup-level {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1D7F5E;
 }
 
 #about > div > div.row > div > p  {
