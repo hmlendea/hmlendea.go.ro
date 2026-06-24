@@ -1482,5 +1482,17 @@
         <script src="js/portfolio-filter.js"></script>
         <script src="js/typewriter.js"></script>
         <script src="js/hori.js"></script>
+        <script>
+            document.querySelectorAll('.skill-tag').forEach(function(tag) {
+                tag.addEventListener('click', function(e) {
+                    var isActive = tag.classList.contains('active');
+                    document.querySelectorAll('.skill-tag.active').forEach(function(t) { t.classList.remove('active'); });
+                    if (!isActive) { tag.classList.add('active'); e.stopPropagation(); }
+                });
+            });
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.skill-tag.active').forEach(function(t) { t.classList.remove('active'); });
+            });
+        </script>
     </body>
 </html>

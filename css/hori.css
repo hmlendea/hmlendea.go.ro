@@ -75,7 +75,8 @@
     border-bottom: 1px solid #dee2e6;
 }
 
-.skill-tag:hover .skill-popup {
+.skill-tag:hover .skill-popup,
+.skill-tag.active .skill-popup {
     opacity: 1;
     visibility: visible;
 }
