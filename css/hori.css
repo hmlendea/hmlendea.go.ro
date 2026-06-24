@@ -117,6 +117,10 @@
     color: #FFF;
 }
 
+.portfolio-modal .btn-close {
+    z-index: 1;
+}
+
 .masthead-avatar {
     border-radius: 50%;
 }
