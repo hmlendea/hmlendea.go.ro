@@ -1,3 +1,43 @@
+/* Skills Section */
+.skill-category {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    height: 100%;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.skill-category-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    background-color: #1D7F5E;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.skill-tag-note {
+    opacity: 0.8;
+    font-size: 0.78em;
+}
+
 #about > div > div.row > div > p  {
     font-size: large;
 }
