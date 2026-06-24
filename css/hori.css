@@ -119,6 +119,8 @@
 
 .portfolio-modal .btn-close {
     z-index: 1;
+    right: auto;
+    left: 0;
 }
 
 .masthead-avatar {
