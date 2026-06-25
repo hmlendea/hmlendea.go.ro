@@ -114,6 +114,7 @@
                     <button class="btn filter-button" data-filter="games">Games</button>
                     <button class="btn filter-button" data-filter="mods">Mods</button>
                     <button class="btn filter-button" data-filter="tools">Tools</button>
+                    <button class="btn filter-button" data-filter="libraries">Libraries</button>
                 </div>
                 <!-- Portfolio Grid Items-->
                 <div id="portfolio-gallery" class="row justify-content-center">
@@ -235,6 +236,16 @@
                                 <div class="portfolio-item-caption-content text-center text-white">Minesweeper</div>
                             </div>
                             <img class="img-fluid" loading="lazy" src="https://raw.githubusercontent.com/hmlendea/minesweeper/master/.github/cover.png" alt="MineSweeper" />
+                        </div>
+                    </div>
+                    <!-- NuciLog -->
+                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn filter libraries">
+                        <!-- NuciLog -->
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalNuciLog">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white">NuciLog</div>
+                            </div>
+                            <img class="img-fluid" loading="lazy" src="https://raw.githubusercontent.com/hmlendea/nucilog/master/.github/cover.png" alt="NuciLog" />
                         </div>
                     </div>
                     <!-- 1,5 -->
@@ -1519,6 +1530,66 @@
                                     <ul class="list-inline item-details">
                                         <li>Language: <strong>C#</strong></li>
                                         <li>Technologies: <strong>.NET Core, CLI</strong></li>
+                                        <li>Operating Systems: <strong>Linux, Mac, Windows</strong></li>
+                                    </ul>
+                                    <br>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Modal: NuciLog -->
+        <div class="portfolio-modal modal fade" id="portfolioModalNuciLog" tabindex="-1" role="dialog" aria-labelledby="portfolioModalNuciLogLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModalNuciLogLabel">NuciLog</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" loading="lazy" src="https://raw.githubusercontent.com/hmlendea/nucilog/master/.github/cover.png" alt="NuciLog cover" />
+                                    <!-- Portfolio Modal - Text-->
+                                    <p>NuciLog is a .NET logging library providing a clean and extensible abstraction over common logging frameworks. The core abstractions live in NuciLog.Core, with NuciLog offering ready-made implementations and integrations.</p>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 text-center">
+                                            <div class="feature-box">
+                                                <i class="fas fa-4x fa-layer-group"></i>
+                                                <h3>Abstraction</h3>
+                                                <p class="text-muted">Clean interface layer that decouples application code from specific logging backends</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 text-center">
+                                            <div class="feature-box">
+                                                <i class="fas fa-4x fa-plug"></i>
+                                                <h3>Extensible</h3>
+                                                <p class="text-muted">Easily swap or extend logging implementations without changing application logic</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        <a class="btn btn-lg btn-outline-dark" href="https://github.com/hmlendea/nucilog"><i class="fab fa-fw fa-github"></i>NuciLog</a>
+                                        <a class="btn btn-lg btn-outline-dark" href="https://github.com/hmlendea/nucilog.core"><i class="fab fa-fw fa-github"></i>NuciLog.Core</a>
+                                    </div>
+                                    <br>
+                                    <ul class="list-inline item-details">
+                                        <li>Language: <strong>C#</strong></li>
+                                        <li>Technologies: <strong>.NET Core, NuGet</strong></li>
                                         <li>Operating Systems: <strong>Linux, Mac, Windows</strong></li>
                                     </ul>
                                     <br>
