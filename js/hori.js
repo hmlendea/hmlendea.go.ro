@@ -37,13 +37,13 @@ $(".filter").not('.highlights').hide();
 (function() {
     var TTL = 60 * 60 * 1000;
 
-    function impactFetch(url) {
+    function impactFetch(url, headers) {
         var key = 'gh_impact_' + url;
         try {
             var cached = JSON.parse(localStorage.getItem(key));
             if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
         } catch (e) {}
-        return fetch(url)
+        return fetch(url, headers ? { headers: headers } : undefined)
             .then(function(r) { return r.ok ? r.json() : null; })
             .then(function(data) {
                 try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
@@ -58,15 +58,25 @@ $(".filter").not('.highlights').hide();
     }
 
     function fetchAllRepos() {
-        function page(p, acc) {
-            return impactFetch('https://api.github.com/users/hmlendea/repos?per_page=100&page=' + p)
+        var cacheKey = 'gh_impact_allrepos_totals';
+        try {
+            var cached = JSON.parse(localStorage.getItem(cacheKey));
+            if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
+        } catch (e) {}
+        function page(p, stars, forks) {
+            return fetch('https://api.github.com/users/hmlendea/repos?per_page=100&page=' + p)
+                .then(function(r) { return r.ok ? r.json() : []; })
                 .then(function(repos) {
-                    if (!repos || repos.length === 0) return acc;
-                    acc = acc.concat(repos);
-                    return repos.length === 100 ? page(p + 1, acc) : acc;
-                });
+                    if (!repos || repos.length === 0) return { stars: stars, forks: forks };
+                    repos.forEach(function(r) { stars += r.stargazers_count || 0; forks += r.forks_count || 0; });
+                    return repos.length === 100 ? page(p + 1, stars, forks) : { stars: stars, forks: forks };
+                })
+                .catch(function() { return { stars: stars, forks: forks }; });
         }
-        return page(1, []);
+        return page(1, 0, 0).then(function(totals) {
+            try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), v: totals })); } catch (e) {}
+            return totals;
+        });
     }
 
     function loadImpactStats() {
@@ -78,11 +88,9 @@ $(".filter").not('.highlights').hide();
         });
 
         // Stars + forks across all repos
-        fetchAllRepos().then(function(repos) {
-            var stars = repos.reduce(function(s, r) { return s + (r.stargazers_count || 0); }, 0);
-            var forks = repos.reduce(function(s, r) { return s + (r.forks_count || 0); }, 0);
-            document.getElementById('impact-stars').textContent = fmt(stars);
-            document.getElementById('impact-forks').textContent = fmt(forks);
+        fetchAllRepos().then(function(totals) {
+            document.getElementById('impact-stars').textContent = fmt(totals.stars);
+            document.getElementById('impact-forks').textContent = fmt(totals.forks);
         });
 
         // Pull requests authored
@@ -98,7 +106,7 @@ $(".filter").not('.highlights').hide();
         });
 
         // Total commits
-        impactFetch('https://api.github.com/search/commits?q=author:hmlendea&per_page=1').then(function(d) {
+        impactFetch('https://api.github.com/search/commits?q=author:hmlendea&per_page=1', { 'Accept': 'application/vnd.github.cloak-preview' }).then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-commits').textContent = fmt(d.total_count);
         });
