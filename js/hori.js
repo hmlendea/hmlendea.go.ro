@@ -35,8 +35,6 @@
 
 })(jQuery); // End of use strict
 
-$(".filter").not('.highlights').hide();
-
 // GitHub Stars & Version Badges — fetched lazily on first modal open, cached in localStorage for 1 hour
 (function() {
     var TTL = 60 * 60 * 1000;

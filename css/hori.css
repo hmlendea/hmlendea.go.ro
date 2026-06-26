@@ -35,10 +35,6 @@
     cursor: default;
 }
 
-.skill-tag-note {
-    opacity: 0.8;
-    font-size: 0.78em;
-}
 
 .skill-popup {
     position: absolute;
@@ -149,11 +145,6 @@ a.impact-stat-link:hover .impact-stat {
     font-size: large;
 }
 
-/* Safety net: if WOW.js never ran, .wow elements should not stay invisible */
-body.wowjs-active .wow {
-    /* WOW.js adds this class to <body> on init — elements are managed by WOW */
-}
-
 /* Reduced-motion: skip all scroll animations and ensure everything is visible */
 @media (prefers-reduced-motion: reduce) {
     .wow {
@@ -240,12 +231,9 @@ body.wowjs-active .wow {
 }
 
 .icoDeviantArt:hover { color: #05CC47; }
-.icoFacebook:hover { color: #3B5998; }
 .icoGitHub:hover { color: #211F1F; }
-.icoInstagram:hover { color: #C13584; }
 .icoLinkedIn:hover { color: #2867B2; }
 .icoMastodon:hover { color: #563ACC; }
 .icoNexus:hover { color: #DA8E35; }
 .icoPixelfed:hover { color: #DB53A7; }
 .icoSteam:hover { color: #1B2838; }
-.icoTwitter:hover { color: #33CCFF; }
