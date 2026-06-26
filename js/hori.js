@@ -90,6 +90,7 @@ $(".filter").not('.highlights').hide();
             modal.removeEventListener('show.bs.modal', onFirstOpen);
             Promise.all(repos.map(ghFetchStars)).then(function(counts) {
                 var total = counts.reduce(function(a, b) { return a + b; }, 0);
+                if (total === 0) return;
                 countEl.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
                 badge.classList.add('loaded');
             });
