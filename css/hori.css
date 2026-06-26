@@ -145,21 +145,34 @@ body.wowjs-active .wow {
     border-right: 0.08em solid #fff;
 }
 
-/* GitHub Stars Badge */
-.gh-stars-badge {
-    display: none;
+/* GitHub Badges Row */
+.gh-badges-row {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     margin: 0 auto 1.25rem;
-    color: #856404;
-    background-color: #fff3cd;
-    border: 1px solid #ffc107;
+}
+
+/* Shared pill base */
+.gh-stars-badge,
+.gh-version-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
     border-radius: 50px;
     padding: 4px 14px;
     font-size: 0.85rem;
     font-weight: 600;
-    width: fit-content;
+    white-space: nowrap;
+}
+
+/* Stars pill — amber */
+.gh-stars-badge {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
 }
 
 .gh-stars-badge.loaded {
@@ -168,6 +181,21 @@ body.wowjs-active .wow {
 
 .gh-stars-badge .fa-star {
     color: #ffc107;
+}
+
+/* Version pill — blue */
+.gh-version-badge {
+    color: #084298;
+    background-color: #cfe2ff;
+    border: 1px solid #9ec5fe;
+}
+
+.gh-version-badge.loaded {
+    display: flex;
+}
+
+.gh-version-badge .fa-tag {
+    color: #0d6efd;
 }
 
 .icoDeviantArt:hover { color: #05CC47; }

@@ -33,66 +33,104 @@
 
 $(".filter").not('.highlights').hide();
 
-// GitHub Stars Badges — fetched lazily on first modal open, cached in localStorage for 1 hour
+// GitHub Stars & Version Badges — fetched lazily on first modal open, cached in localStorage for 1 hour
 (function() {
     var TTL = 60 * 60 * 1000;
 
-    function ghFetchStars(repo) {
-        var key = 'gh_stars_' + repo;
+    function ghFetch(url) {
+        var key = 'gh_cache_' + url;
         try {
             var cached = JSON.parse(localStorage.getItem(key));
             if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
         } catch (e) {}
-        return fetch('https://api.github.com/repos/' + repo)
-            .then(function(r) { return r.ok ? r.json() : {}; })
-            .then(function(d) {
-                var v = d.stargazers_count || 0;
-                try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: v })); } catch (e) {}
-                return v;
+        return fetch(url)
+            .then(function(r) { return r.ok ? r.json() : null; })
+            .then(function(data) {
+                try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
+                return data;
             })
-            .catch(function() { return 0; });
+            .catch(function() { return null; });
     }
 
     var repoMap = {
-        '#portfolioModalNarivia':                ['hmlendea/narivia'],
-        '#portfolioModalMoreCulturalNames':      ['hmlendea/more-cultural-names'],
-        '#portfolioModalGeForceNowElectron':     ['hmlendea/gfn-electron'],
-        '#portfolioModalPersonalLogManager':     ['hmlendea/personal-log-manager', 'hmlendea/personal-log-manager-client'],
-        '#portfolioModalIptvPlaylistAggregator': ['hmlendea/iptv-playlist-aggregator'],
-        '#portfolioModalUniversalNameGenerator': ['hmlendea/universal-name-generator'],
-        '#portfolioModalDuolingoDesktop':        ['hmlendea/duolingo-desktop'],
-        '#portfolioModalBitwardenVaultManager':  ['hmlendea/bitwarden-vault-manager'],
-        '#portfolioModalTransliterationAPI':     ['hmlendea/transliteration-api'],
-        '#portfolioModalMemoryBlocks':           ['hmlendea/memoryblocks'],
-        '#portfolioModalSokoGrump':              ['hmlendea/sokogrump'],
-        '#portfolioModalMinesweeper':            ['hmlendea/minesweeper'],
-        '#portfolioModalNuciLog':                ['hmlendea/nucilog', 'hmlendea/nucilog.core'],
-        '#portfolioModalBackgammon':             ['hmlendea/backgammon-by-horatiu'],
-        '#portfolioModalNuciAPI':                ['hmlendea/nuciapi', 'hmlendea/nuciapi.client', 'hmlendea/nuciapi.controllers', 'hmlendea/nuciapi.middleware', 'hmlendea/nuciapi.middleware.exceptionhandling', 'hmlendea/nuciapi.middleware.logging', 'hmlendea/nuciapi.middleware.security'],
-        '#portfolioModalNuciWebAutomation':      ['hmlendea/nuciweb.automation', 'hmlendea/nuciweb.automation.selenium', 'hmlendea/nuciweb.automation.playwright']
+        '#portfolioModalNarivia':                [['hmlendea/narivia']],
+        '#portfolioModalMoreCulturalNames':      [['hmlendea/more-cultural-names']],
+        '#portfolioModalGeForceNowElectron':     [['hmlendea/gfn-electron']],
+        '#portfolioModalPersonalLogManager':     [['hmlendea/personal-log-manager', 'API'], ['hmlendea/personal-log-manager-client', 'Client']],
+        '#portfolioModalIptvPlaylistAggregator': [['hmlendea/iptv-playlist-aggregator']],
+        '#portfolioModalUniversalNameGenerator': [['hmlendea/universal-name-generator']],
+        '#portfolioModalDuolingoDesktop':        [['hmlendea/duolingo-desktop']],
+        '#portfolioModalBitwardenVaultManager':  [['hmlendea/bitwarden-vault-manager']],
+        '#portfolioModalTransliterationAPI':     [['hmlendea/transliteration-api']],
+        '#portfolioModalMemoryBlocks':           [['hmlendea/memoryblocks']],
+        '#portfolioModalSokoGrump':              [['hmlendea/sokogrump']],
+        '#portfolioModalMinesweeper':            [['hmlendea/minesweeper']],
+        '#portfolioModalNuciLog':                [['hmlendea/nucilog', 'NuciLog'], ['hmlendea/nucilog.core', 'NuciLog.Core']],
+        '#portfolioModalBackgammon':             [['hmlendea/backgammon-by-horatiu']],
+        '#portfolioModalNuciAPI':                [['hmlendea/nuciapi', 'NuciAPI'], ['hmlendea/nuciapi.client', 'Client'], ['hmlendea/nuciapi.controllers', 'Controllers'], ['hmlendea/nuciapi.middleware', 'Middleware'], ['hmlendea/nuciapi.middleware.exceptionhandling', 'ExceptionHandling'], ['hmlendea/nuciapi.middleware.logging', 'Logging'], ['hmlendea/nuciapi.middleware.security', 'Security']],
+        '#portfolioModalNuciWebAutomation':      [['hmlendea/nuciweb.automation', 'NuciWeb.Automation'], ['hmlendea/nuciweb.automation.selenium', 'Selenium'], ['hmlendea/nuciweb.automation.playwright', 'Playwright']]
     };
 
     Object.keys(repoMap).forEach(function(modalSelector) {
         var modal = document.querySelector(modalSelector);
         if (!modal) return;
         var repos = repoMap[modalSelector];
+        var repoSlugs = repos.map(function(r) { return r[0]; });
+        var multiRepo = repos.length > 1;
 
+        // Inject a shared badge row after the divider
         var divider = modal.querySelector('.divider-custom');
         if (!divider) return;
+        var row = document.createElement('div');
+        row.className = 'gh-badges-row';
+        divider.insertAdjacentElement('afterend', row);
 
-        var badge = document.createElement('div');
-        badge.className = 'gh-stars-badge';
-        badge.innerHTML = '<i class="fas fa-star"></i> <span class="gh-stars-count">\u2026</span> stars on GitHub';
-        divider.insertAdjacentElement('afterend', badge);
-        var countEl = badge.querySelector('.gh-stars-count');
+        // Stars badge
+        var starsBadge = document.createElement('div');
+        starsBadge.className = 'gh-stars-badge';
+        starsBadge.innerHTML = '<i class="fas fa-star"></i> <span class="gh-stars-count">\u2026</span> stars on GitHub';
+        row.appendChild(starsBadge);
+        var starsCountEl = starsBadge.querySelector('.gh-stars-count');
 
+        // Version badges — one per repo, labelled when multi-repo
+        var versionBadges = repos.map(function(r) {
+            var repo = r[0];
+            var label = multiRepo ? (r[1] || repo.split('/')[1]) : '';
+            var vbadge = document.createElement('div');
+            vbadge.className = 'gh-version-badge';
+            vbadge.innerHTML = '<i class="fas fa-tag"></i> <span>' + (label ? label + ': ' : '') + '\u2026</span>';
+            row.appendChild(vbadge);
+            return { repo: repo, badge: vbadge, label: label };
+        });
+
+        // Fetch everything on first open
         modal.addEventListener('show.bs.modal', function onFirstOpen() {
             modal.removeEventListener('show.bs.modal', onFirstOpen);
-            Promise.all(repos.map(ghFetchStars)).then(function(counts) {
-                var total = counts.reduce(function(a, b) { return a + b; }, 0);
-                if (total === 0) return;
-                countEl.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
-                badge.classList.add('loaded');
+
+            // Stars
+            if (starsBadge) {
+                Promise.all(repoSlugs.map(function(repo) {
+                    return ghFetch('https://api.github.com/repos/' + repo)
+                        .then(function(d) { return (d && d.stargazers_count) || 0; });
+                })).then(function(counts) {
+                    var total = counts.reduce(function(a, b) { return a + b; }, 0);
+                    if (total === 0) return;
+                    starsCountEl.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
+                    starsBadge.classList.add('loaded');
+                });
+            }
+
+            // Versions
+            versionBadges.forEach(function(item) {
+                ghFetch('https://api.github.com/repos/' + item.repo + '/releases/latest')
+                    .then(function(d) {
+                        if (d && d.tag_name) {
+                            item.badge.querySelector('span').textContent = (item.label ? item.label + ': ' : '') + d.tag_name;
+                            item.badge.classList.add('loaded');
+                        } else {
+                            item.badge.remove();
+                        }
+                    });
             });
         });
     });
