@@ -145,6 +145,31 @@ body.wowjs-active .wow {
     border-right: 0.08em solid #fff;
 }
 
+/* GitHub Stars Badge */
+.gh-stars-badge {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 auto 1.25rem;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.gh-stars-badge.loaded {
+    display: flex;
+}
+
+.gh-stars-badge .fa-star {
+    color: #ffc107;
+}
+
 .icoDeviantArt:hover { color: #05CC47; }
 .icoFacebook:hover { color: #3B5998; }
 .icoGitHub:hover { color: #211F1F; }
