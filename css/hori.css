@@ -104,6 +104,35 @@
     color: #1D7F5E;
 }
 
+/* Open Source Impact Section */
+.impact-stat {
+    padding: 1.25rem 0.5rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    height: 100%;
+}
+
+.impact-stat .fas {
+    color: rgba(255,255,255,0.85);
+}
+
+.impact-stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+}
+
+.impact-stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+}
+
 #about > div > div.row > div > p  {
     font-size: large;
 }
