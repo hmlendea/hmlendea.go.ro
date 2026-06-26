@@ -12,9 +12,7 @@
             new WOW().init();
             wowLoaded = true;
         }
-    } catch (e) {
-        wowLoaded = false;
-    }
+    } catch (e) {}
 
     if (!wowLoaded) {
         var wowEls = document.querySelectorAll('.wow');
@@ -35,25 +33,24 @@
 
 })(jQuery); // End of use strict
 
+var TTL = 60 * 60 * 1000;
+function cachedFetch(url, headers) {
+    var key = 'gh_' + url;
+    try {
+        var cached = JSON.parse(localStorage.getItem(key));
+        if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
+    } catch (e) {}
+    return fetch(url, headers ? { headers: headers } : undefined)
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+            try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
+            return data;
+        })
+        .catch(function() { return null; });
+}
+
 // GitHub Stars & Version Badges — fetched lazily on first modal open, cached in localStorage for 1 hour
 (function() {
-    var TTL = 60 * 60 * 1000;
-
-    function ghFetch(url) {
-        var key = 'gh_cache_' + url;
-        try {
-            var cached = JSON.parse(localStorage.getItem(key));
-            if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
-        } catch (e) {}
-        return fetch(url)
-            .then(function(r) { return r.ok ? r.json() : null; })
-            .then(function(data) {
-                try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
-                return data;
-            })
-            .catch(function() { return null; });
-    }
-
     var repoMap = {
         '#portfolioModalNarivia':                [['hmlendea/narivia']],
         '#portfolioModalMoreCulturalNames':      [['hmlendea/more-cultural-names']],
@@ -110,21 +107,19 @@
             modal.removeEventListener('show.bs.modal', onFirstOpen);
 
             // Stars
-            if (starsBadge) {
-                Promise.all(repoSlugs.map(function(repo) {
-                    return ghFetch('https://api.github.com/repos/' + repo)
-                        .then(function(d) { return (d && d.stargazers_count) || 0; });
-                })).then(function(counts) {
-                    var total = counts.reduce(function(a, b) { return a + b; }, 0);
-                    if (total === 0) return;
-                    starsCountEl.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
-                    starsBadge.classList.add('loaded');
-                });
-            }
+            Promise.all(repoSlugs.map(function(repo) {
+                return cachedFetch('https://api.github.com/repos/' + repo)
+                    .then(function(d) { return (d && d.stargazers_count) || 0; });
+            })).then(function(counts) {
+                var total = counts.reduce(function(a, b) { return a + b; }, 0);
+                if (total === 0) return;
+                starsCountEl.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
+                starsBadge.classList.add('loaded');
+            });
 
             // Versions
             versionBadges.forEach(function(item) {
-                ghFetch('https://api.github.com/repos/' + item.repo + '/releases/latest')
+                cachedFetch('https://api.github.com/repos/' + item.repo + '/releases/latest')
                     .then(function(d) {
                         if (d && d.tag_name) {
                             item.badge.querySelector('span').textContent = (item.label ? item.label + ': ' : '') + d.tag_name;
@@ -140,23 +135,6 @@
 
 // Open Source Impact Stats — fetched lazily when section scrolls into view
 (function() {
-    var TTL = 60 * 60 * 1000;
-
-    function impactFetch(url, headers) {
-        var key = 'gh_impact_' + url;
-        try {
-            var cached = JSON.parse(localStorage.getItem(key));
-            if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
-        } catch (e) {}
-        return fetch(url, headers ? { headers: headers } : undefined)
-            .then(function(r) { return r.ok ? r.json() : null; })
-            .then(function(data) {
-                try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
-                return data;
-            })
-            .catch(function() { return null; });
-    }
-
     function fmt(n) {
         if (n === null || n === undefined) return '?';
         return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
@@ -186,7 +164,7 @@
 
     function loadImpactStats() {
         // User profile: repos + followers
-        impactFetch('https://api.github.com/users/hmlendea').then(function(u) {
+        cachedFetch('https://api.github.com/users/hmlendea').then(function(u) {
             if (!u) return;
             document.getElementById('impact-repos').textContent = fmt(u.public_repos);
             document.getElementById('impact-followers').textContent = fmt(u.followers);
@@ -199,19 +177,19 @@
         });
 
         // Pull requests authored
-        impactFetch('https://api.github.com/search/issues?q=author:hmlendea+type:pr&per_page=1').then(function(d) {
+        cachedFetch('https://api.github.com/search/issues?q=author:hmlendea+type:pr&per_page=1').then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-prs').textContent = fmt(d.total_count);
         });
 
         // Issues filed
-        impactFetch('https://api.github.com/search/issues?q=author:hmlendea+type:issue&per_page=1').then(function(d) {
+        cachedFetch('https://api.github.com/search/issues?q=author:hmlendea+type:issue&per_page=1').then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-issues').textContent = fmt(d.total_count);
         });
 
         // Total commits
-        impactFetch('https://api.github.com/search/commits?q=author:hmlendea&per_page=1', { 'Accept': 'application/vnd.github.cloak-preview' }).then(function(d) {
+        cachedFetch('https://api.github.com/search/commits?q=author:hmlendea&per_page=1', { 'Accept': 'application/vnd.github.cloak-preview' }).then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-commits').textContent = fmt(d.total_count);
         });
