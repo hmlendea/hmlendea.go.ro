@@ -6,12 +6,3 @@
     text-align: center;
     margin-bottom: 30px;
 }
-.btn-default:active .filter-button:active
-{
-    color: white;
-}
-
-.port-image
-{
-    width: 100%;
-}
