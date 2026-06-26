@@ -104,6 +104,47 @@
     color: #1D7F5E;
 }
 
+a.impact-stat-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+a.impact-stat-link:hover .impact-stat {
+    background: rgba(var(--bs-primary-rgb), 0.12);
+    border-color: rgba(var(--bs-primary-rgb), 0.3);
+}
+
+/* Open Source Impact Section */
+.impact-stat {
+    padding: 1.25rem 0.5rem;
+    background: rgba(var(--bs-primary-rgb), 0.06);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+    border-radius: 12px;
+    height: 100%;
+}
+
+.impact-stat .fas {
+    color: var(--bs-primary);
+}
+
+.impact-stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #212529;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+}
+
+.impact-stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(0,0,0,0.55);
+    font-weight: 600;
+}
+
 #about > div > div.row > div > p  {
     font-size: large;
 }
@@ -128,7 +169,7 @@ body.wowjs-active .wow {
 }
 
 #contact > div > div > div.col-lg-4.me-auto > p > a {
-    color: #FFF;
+    color: inherit;
 }
 
 .portfolio-modal .btn-close {
