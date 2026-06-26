@@ -1,6 +1,10 @@
 (function($) {
     "use strict"; // Start of use strict
 
+    // Dynamic copyright year
+    var el = document.getElementById('copyright-year');
+    if (el) el.textContent = new Date().getFullYear();
+
     // Initialize WOW.js Scrolling Animations, with IntersectionObserver fallback
     var wowLoaded = false;
     try {
