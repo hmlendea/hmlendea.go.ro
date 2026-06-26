@@ -65,9 +65,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#impact">Impact</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#skills">Skills</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#timeline">Timeline</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
@@ -97,6 +97,107 @@
                 </span>
             </div>
         </header>
+
+        <!-- Open Source Impact Section -->
+        <section class="page-section" id="impact">
+            <div class="container">
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Open Source Impact</h2>
+                <p class="text-center mb-0" style="opacity:0.75;font-size:0.9rem;letter-spacing:0.05em;">Since December 2014</p>
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <div class="row justify-content-center g-4 text-center">
+                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-star mb-3"></i>
+                            <div class="impact-stat-value" id="impact-stars">—</div>
+                            <div class="impact-stat-label">Stars Earned</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
+                        <a href="https://github.com/hmlendea?tab=followers" target="_blank" rel="noopener" class="impact-stat-link">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-users mb-3"></i>
+                            <div class="impact-stat-value" id="impact-followers">—</div>
+                            <div class="impact-stat-label">Followers</div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
+                        <a href="https://github.com/hmlendea?tab=repositories" target="_blank" rel="noopener" class="impact-stat-link">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-folder-open mb-3"></i>
+                            <div class="impact-stat-value" id="impact-repos">—</div>
+                            <div class="impact-stat-label">Repositories</div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-code-fork mb-3"></i>
+                            <div class="impact-stat-value" id="impact-forks">—</div>
+                            <div class="impact-stat-label">Forks</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center g-4 text-center mt-0">
+                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
+                        <a href="https://github.com/search?q=author%3Ahmlendea&type=pullrequests" target="_blank" rel="noopener" class="impact-stat-link">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-code-pull-request mb-3"></i>
+                            <div class="impact-stat-value" id="impact-prs">—</div>
+                            <div class="impact-stat-label">Pull Requests</div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
+                        <a href="https://github.com/search?q=author%3Ahmlendea&type=issues" target="_blank" rel="noopener" class="impact-stat-link">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-circle-dot mb-3"></i>
+                            <div class="impact-stat-value" id="impact-issues">—</div>
+                            <div class="impact-stat-label">Issues Filed</div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
+                        <a href="https://github.com/search?q=author%3Ahmlendea&type=commits" target="_blank" rel="noopener" class="impact-stat-link">
+                        <div class="impact-stat">
+                            <i class="fas fa-3x fa-code-commit mb-3"></i>
+                            <div class="impact-stat-value" id="impact-commits">—</div>
+                            <div class="impact-stat-label">Commits</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section-->
+        <section class="page-section bg-primary text-white mb-0" id="about">
+            <div class="container">
+                <!-- About Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
+                        <p>I am a software engineer with a keen interest in Linux and open-source software.</p>
+                        <p>I'm a proactive and dedicated team player with a strong desire to take on new challenges and learn from them.</p>
+                    </div>
+                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
+                        <p>I also actively contribute to open-source projects and am constantly seeking ways to enhance my skills and knowledge.</p>
+                        <p>In my spare time, I enjoy indulging in my favorite pastimes, such as going to the cinema and theatre, watching TV shows, playing video games, and listening to audiobooks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Portfolio Section-->
         <section class="page-section portfolio" id="portfolio">
@@ -283,38 +384,13 @@
             </div>
         </section>
 
-        <!-- About Section-->
-        <section class="page-section bg-primary text-white mb-0" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div class="col-lg-4 ms-auto wow animate__animated animate__slideInLeft">
-                        <p>I am a software engineer with a keen interest in Linux and open-source software.</p>
-                        <p>I'm a proactive and dedicated team player with a strong desire to take on new challenges and learn from them.</p>
-                    </div>
-                    <div class="col-lg-4 me-auto wow animate__animated animate__slideInRight">
-                        <p>I also actively contribute to open-source projects and am constantly seeking ways to enhance my skills and knowledge.</p>
-                        <p>In my spare time, I enjoy indulging in my favorite pastimes, such as going to the cinema and theatre, watching TV shows, playing video games, and listening to audiobooks.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Skills Section -->
-        <section class="page-section bg-light" id="skills">
+        <section class="page-section bg-primary text-white mb-0" id="skills">
             <div class="container">
                 <!-- Skills Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Skills</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-white">Skills</h2>
                 <!-- Icon Divider-->
-                <div class="divider-custom">
+                <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
@@ -443,82 +519,6 @@
                                 <span class="skill-tag">Spanish<span class="skill-popup"><span class="skill-popup-name">🇪🇸 Spanish</span><span class="skill-popup-desc">Actively learning through practice and language study apps.</span><span class="skill-popup-level">★☆☆☆☆&ensp;Learning</span></span></span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Open Source Impact Section -->
-        <section class="page-section bg-primary text-white mb-0" id="impact">
-            <div class="container">
-                <h2 class="page-section-heading text-center text-uppercase text-white">Open Source Impact</h2>
-                <p class="text-center mb-0" style="opacity:0.75;font-size:0.9rem;letter-spacing:0.05em;">Since December 2014</p>
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <div class="row justify-content-center g-4 text-center">
-                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-star mb-3"></i>
-                            <div class="impact-stat-value" id="impact-stars">—</div>
-                            <div class="impact-stat-label">Stars Earned</div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
-                        <a href="https://github.com/hmlendea?tab=followers" target="_blank" rel="noopener" class="impact-stat-link">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-users mb-3"></i>
-                            <div class="impact-stat-value" id="impact-followers">—</div>
-                            <div class="impact-stat-label">Followers</div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
-                        <a href="https://github.com/hmlendea?tab=repositories" target="_blank" rel="noopener" class="impact-stat-link">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-folder-open mb-3"></i>
-                            <div class="impact-stat-value" id="impact-repos">—</div>
-                            <div class="impact-stat-label">Repositories</div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3 wow animate__animated animate__fadeInUp">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-code-fork mb-3"></i>
-                            <div class="impact-stat-value" id="impact-forks">—</div>
-                            <div class="impact-stat-label">Forks</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center g-4 text-center mt-0">
-                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
-                        <a href="https://github.com/search?q=author%3Ahmlendea&type=pullrequests" target="_blank" rel="noopener" class="impact-stat-link">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-code-pull-request mb-3"></i>
-                            <div class="impact-stat-value" id="impact-prs">—</div>
-                            <div class="impact-stat-label">Pull Requests</div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
-                        <a href="https://github.com/search?q=author%3Ahmlendea&type=issues" target="_blank" rel="noopener" class="impact-stat-link">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-circle-dot mb-3"></i>
-                            <div class="impact-stat-value" id="impact-issues">—</div>
-                            <div class="impact-stat-label">Issues Filed</div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 wow animate__animated animate__fadeInUp">
-                        <a href="https://github.com/search?q=author%3Ahmlendea&type=commits" target="_blank" rel="noopener" class="impact-stat-link">
-                        <div class="impact-stat">
-                            <i class="fas fa-3x fa-code-commit mb-3"></i>
-                            <div class="impact-stat-value" id="impact-commits">—</div>
-                            <div class="impact-stat-label">Commits</div>
-                        </div>
-                        </a>
                     </div>
                 </div>
             </div>
