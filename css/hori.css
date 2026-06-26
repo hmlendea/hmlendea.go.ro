@@ -104,6 +104,18 @@
     color: #1D7F5E;
 }
 
+a.impact-stat-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+a.impact-stat-link:hover .impact-stat {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.45);
+}
+
 /* Open Source Impact Section */
 .impact-stat {
     padding: 1.25rem 0.5rem;
