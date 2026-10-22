@@ -33,23 +33,13 @@
 
 })(jQuery); // End of use strict
 
-var TTL = 60 * 60 * 1000;
-function cachedFetch(url, headers) {
-    var key = 'gh_' + url;
-    try {
-        var cached = JSON.parse(localStorage.getItem(key));
-        if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
-    } catch (e) {}
-    return fetch(url, headers ? { headers: headers } : undefined)
+function fetchGitHub(resource) {
+    return fetch('/api/github/' + resource)
         .then(function(r) { return r.ok ? r.json() : null; })
-        .then(function(data) {
-            try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), v: data })); } catch (e) {}
-            return data;
-        })
         .catch(function() { return null; });
 }
 
-// GitHub Stars & Version Badges — fetched lazily on first modal open, cached in localStorage for 1 hour
+// GitHub Stars & Version Badges — fetched lazily, cached server-side for 30 minutes
 (function() {
     var repoMap = {
         '#portfolioModalNarivia':                [['hmlendea/narivia']],
@@ -108,7 +98,7 @@ function cachedFetch(url, headers) {
 
             // Stars
             Promise.all(repoSlugs.map(function(repo) {
-                return cachedFetch('https://api.github.com/repos/' + repo)
+                return fetchGitHub('repos/' + repo)
                     .then(function(d) { return (d && d.stargazers_count) || 0; });
             })).then(function(counts) {
                 var total = counts.reduce(function(a, b) { return a + b; }, 0);
@@ -119,7 +109,7 @@ function cachedFetch(url, headers) {
 
             // Versions
             versionBadges.forEach(function(item) {
-                cachedFetch('https://api.github.com/repos/' + item.repo + '/releases/latest')
+                fetchGitHub('repos/' + item.repo + '/releases/latest')
                     .then(function(d) {
                         if (d && d.tag_name) {
                             item.badge.querySelector('span').textContent = (item.label ? item.label + ': ' : '') + d.tag_name;
@@ -140,56 +130,35 @@ function cachedFetch(url, headers) {
         return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
     }
 
-    function fetchAllRepos() {
-        var cacheKey = 'gh_impact_allrepos_totals';
-        try {
-            var cached = JSON.parse(localStorage.getItem(cacheKey));
-            if (cached && (Date.now() - cached.ts < TTL)) return Promise.resolve(cached.v);
-        } catch (e) {}
-        function page(p, stars, forks) {
-            return fetch('https://api.github.com/users/hmlendea/repos?per_page=100&page=' + p)
-                .then(function(r) { return r.ok ? r.json() : []; })
-                .then(function(repos) {
-                    if (!repos || repos.length === 0) return { stars: stars, forks: forks };
-                    repos.forEach(function(r) { stars += r.stargazers_count || 0; forks += r.forks_count || 0; });
-                    return repos.length === 100 ? page(p + 1, stars, forks) : { stars: stars, forks: forks };
-                })
-                .catch(function() { return { stars: stars, forks: forks }; });
-        }
-        return page(1, 0, 0).then(function(totals) {
-            try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), v: totals })); } catch (e) {}
-            return totals;
-        });
-    }
-
     function loadImpactStats() {
         // User profile: repos + followers
-        cachedFetch('https://api.github.com/users/hmlendea').then(function(u) {
+        fetchGitHub('profile').then(function(u) {
             if (!u) return;
             document.getElementById('impact-repos').textContent = fmt(u.public_repos);
             document.getElementById('impact-followers').textContent = fmt(u.followers);
         });
 
         // Stars + forks across all repos
-        fetchAllRepos().then(function(totals) {
+        fetchGitHub('repository-totals').then(function(totals) {
+            if (!totals) return;
             document.getElementById('impact-stars').textContent = fmt(totals.stars);
             document.getElementById('impact-forks').textContent = fmt(totals.forks);
         });
 
         // Pull requests authored
-        cachedFetch('https://api.github.com/search/issues?q=author:hmlendea+type:pr&per_page=1').then(function(d) {
+        fetchGitHub('pull-requests').then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-prs').textContent = fmt(d.total_count);
         });
 
         // Issues filed
-        cachedFetch('https://api.github.com/search/issues?q=author:hmlendea+type:issue&per_page=1').then(function(d) {
+        fetchGitHub('issues').then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-issues').textContent = fmt(d.total_count);
         });
 
         // Total commits
-        cachedFetch('https://api.github.com/search/commits?q=author:hmlendea&per_page=1', { 'Accept': 'application/vnd.github.cloak-preview' }).then(function(d) {
+        fetchGitHub('commits').then(function(d) {
             if (d && d.total_count !== undefined)
                 document.getElementById('impact-commits').textContent = fmt(d.total_count);
         });

@@ -1,8 +1,14 @@
+using System;
+using System.Net.Http;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using NuciWeb.HTTP;
+
 using PersonalPresentationWebsite.Components;
+using PersonalPresentationWebsite.Endpoints;
 
 namespace PersonalPresentationWebsite
 {
@@ -13,6 +19,16 @@ namespace PersonalPresentationWebsite
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddRazorComponents();
+            builder.Services.AddOutputCache();
+            builder.Services.AddSingleton<HttpClient>(services =>
+            {
+                HttpClient client = HttpClientCreator.Create();
+                client.BaseAddress = new Uri("https://api.github.com/");
+                client.Timeout = TimeSpan.FromSeconds(30);
+                client.DefaultRequestHeaders.Accept.ParseAdd("application/vnd.github+json");
+
+                return client;
+            });
 
             WebApplication app = builder.Build();
 
@@ -25,7 +41,9 @@ namespace PersonalPresentationWebsite
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAntiforgery();
+            app.UseOutputCache();
 
+            app.MapGitHubEndpoints();
             app.MapStaticAssets();
             app.MapRazorComponents<App>();
 
