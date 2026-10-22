@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
@@ -8,14 +7,13 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace PersonalPresentationWebsite.Endpoints
 {
     public static class GitHubEndpoints
     {
-        private static TimeSpan CacheDuration => TimeSpan.FromMinutes(30);
+        public static string CachePolicyName => "GitHub";
 
         private static int RepositoryPageSize => 100;
 
@@ -38,7 +36,7 @@ namespace PersonalPresentationWebsite.Endpoints
             MapResource(application, "issues", "search/issues?q=author:hmlendea+type:issue&per_page=1");
             MapResource(application, "commits", "search/commits?q=author:hmlendea&per_page=1");
             application.MapGet("/api/github/repository-totals", GetRepositoryTotalsAsync)
-                .CacheOutput(ConfigureCache);
+                .CacheOutput(CachePolicyName);
 
             foreach (string repository in Repositories)
             {
@@ -47,9 +45,6 @@ namespace PersonalPresentationWebsite.Endpoints
                 MapResource(application, $"{resource}/releases/latest", $"{resource}/releases/latest");
             }
         }
-
-        private static void ConfigureCache(OutputCachePolicyBuilder policy)
-            => policy.Expire(CacheDuration).SetVaryByQuery([]);
 
         private static void MapResource(WebApplication application, string route, string resource)
         {
@@ -70,7 +65,7 @@ namespace PersonalPresentationWebsite.Endpoints
                 using JsonDocument document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
 
                 return Results.Json(document.RootElement.Clone());
-            }).CacheOutput(ConfigureCache);
+            }).CacheOutput(CachePolicyName);
         }
 
         private static async Task<IResult> GetRepositoryTotalsAsync(HttpClient client)

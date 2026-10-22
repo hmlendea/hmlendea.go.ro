@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,9 +18,24 @@ namespace PersonalPresentationWebsite
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            int cacheDurationInMinutes = builder.Configuration.GetValue<int>(
+                "GitHub:CacheDurationInMinutes",
+                30
+            );
+
+            if (cacheDurationInMinutes < 30)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "GitHub:CacheDurationInMinutes",
+                    "GitHub cache duration must be at least 30 minutes."
+                );
+            }
 
             builder.Services.AddRazorComponents();
-            builder.Services.AddOutputCache();
+            builder.Services.AddOutputCache(options => options.AddPolicy(
+                GitHubEndpoints.CachePolicyName,
+                policy => policy.Expire(TimeSpan.FromMinutes(cacheDurationInMinutes)).SetVaryByQuery([])
+            ));
             builder.Services.AddSingleton<HttpClient>(services =>
             {
                 HttpClient client = HttpClientCreator.Create();

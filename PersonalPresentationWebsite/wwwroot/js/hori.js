@@ -39,7 +39,7 @@ function fetchGitHub(resource) {
         .catch(function() { return null; });
 }
 
-// GitHub Stars & Version Badges — fetched lazily, cached server-side for 30 minutes
+// GitHub Stars & Version Badges — fetched lazily, cached server-side
 (function() {
     var repoMap = {
         '#portfolioModalNarivia':                [['hmlendea/narivia']],
