@@ -237,6 +237,16 @@ This script downloads and executes an external release helper from `https://raw.
 | `Animate.css` | 4.1.1 | Runtime (front end) | Entry animations. |
 | `WOW.js` | 1.1.2 | Runtime (front end) | Reveals animated elements while scrolling. |
 
+## ⚙️ GitHub Actions
+
+The repository uses a single workflow for continuous integration:
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| [`.github/workflows/dotnet.yml`](.github/workflows/dotnet.yml) | Push or pull request to `master` | Restores, builds, and tests the .NET 10.0 project. |
+
+The workflow runs on `ubuntu-latest`, installs the .NET 10.0 SDK, restores NuGet packages, builds the solution, and executes any tests.
+
 ## 🗂️ Project Structure
 
 The repository hosts a single ASP.NET Core project, `PersonalPresentationWebsite`, alongside the solution file, the release helper, and the editor configuration.
