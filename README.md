@@ -31,9 +31,12 @@ My personal presentation website.
   - [Setup](#setup)
   - [Build](#build)
   - [Run](#run)
+  - [Test](#test)
+  - [Coverage](#coverage)
   - [Release](#release)
   - [Dependencies](#dependencies)
 - [Project Structure](#-project-structure)
+  - [Projects and Packages](#projects-and-packages)
   - [Directories](#directories)
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
@@ -212,6 +215,22 @@ The `http` launch profile applies by default, so the site becomes available at `
 dotnet watch run --project PersonalPresentationWebsite/PersonalPresentationWebsite.csproj
 ```
 
+### Test
+
+The NUnit unit suite renders the Razor pages with bUnit, while the integration suite hosts the application with `WebApplicationFactory` and replaces the GitHub `HttpClient` with a stub handler, so no live GitHub access is required:
+
+```bash
+dotnet test PersonalPresentationWebsite.slnx
+```
+
+### Coverage
+
+Generate a Cobertura report with Coverlet:
+
+```bash
+dotnet test PersonalPresentationWebsite.slnx --collect:"XPlat Code Coverage" --results-directory TestResults
+```
+
 ### Release
 
 The repository includes `release.sh`, which delegates to the upstream deployment script used by the project maintainer.
@@ -236,6 +255,13 @@ This script downloads and executes an external release helper from `https://raw.
 | `jQuery Easing` | 1.12.1 | Runtime (front end) | Easing functions for the scroll animations. |
 | `Animate.css` | 4.1.1 | Runtime (front end) | Entry animations. |
 | `WOW.js` | 1.1.2 | Runtime (front end) | Reveals animated elements while scrolling. |
+| `bunit` | 2.15.2 | Development | Renders the Razor components in the unit tests. |
+| `coverlet.collector` | 10.1.0 | Development | Coverage collection during test execution. |
+| `Microsoft.AspNetCore.Mvc.Testing` | 10.0.14 | Development | Hosts the application for the integration tests. |
+| `Microsoft.NET.Test.Sdk` | 18.11.0 | Development | Test runner infrastructure. |
+| `NUnit` | 5.0.0 | Development | Unit testing framework. |
+| `NUnit.Analyzers` | 4.15.0 | Development | NUnit assertion and API analysers. |
+| `NUnit3TestAdapter` | 6.3.1 | Development | VS Test Platform adapter. |
 
 ## ⚙️ GitHub Actions
 
@@ -245,11 +271,19 @@ The repository uses a single workflow for continuous integration:
 |----------|---------|---------|
 | [`.github/workflows/dotnet.yml`](.github/workflows/dotnet.yml) | Push or pull request to `master` | Restores, builds, and tests the .NET 10.0 project. |
 
-The workflow runs on `ubuntu-latest`, installs the .NET 10.0 SDK, restores NuGet packages, builds the solution, and executes any tests.
+The workflow runs on `ubuntu-latest`, installs the .NET 10.0 SDK, restores NuGet packages, builds the solution, and executes the unit and integration test projects.
 
 ## 🗂️ Project Structure
 
-The repository hosts a single ASP.NET Core project, `PersonalPresentationWebsite`, alongside the solution file, the release helper, and the editor configuration.
+The repository hosts the ASP.NET Core project, its unit and integration test projects, alongside the solution file, the release helper, and the editor configuration.
+
+### Projects and Packages
+
+| Project | Type | Purpose |
+|---------|------|---------|
+| `PersonalPresentationWebsite/` | ASP.NET Core web application | Renders and serves the website. |
+| `PersonalPresentationWebsite.UnitTests/` | NUnit test project | Verifies the rendered pages and components with bUnit. |
+| `PersonalPresentationWebsite.IntegrationTests/` | NUnit test project | Verifies the HTTP endpoints and the startup configuration against a stubbed GitHub API. |
 
 ### Directories
 
@@ -263,6 +297,8 @@ The repository hosts a single ASP.NET Core project, `PersonalPresentationWebsite
 | `PersonalPresentationWebsite/wwwroot/assets/img/funding/` | Logos of the supported funding platforms. |
 | `PersonalPresentationWebsite/wwwroot/css/` | Custom stylesheets layered on top of the theme. |
 | `PersonalPresentationWebsite/wwwroot/js/` | Progressive-enhancement scripts for filtering, popups, typewriter, and animation. |
+| `PersonalPresentationWebsite.UnitTests/` | bUnit tests covering the rendered pages, layout, and error component. |
+| `PersonalPresentationWebsite.IntegrationTests/` | Endpoint and startup tests hosting the application in memory. |
 | `.vscode/` | Editor tasks and launch configuration for building, publishing, and running the site. |
 
 ## 🚢 Deployment
