@@ -1,5 +1,6 @@
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/hmlendea.go.ro)](https://github.com/hmlendea/hmlendea.go.ro/releases/latest)
 [![Website](https://img.shields.io/badge/Website-Visit-blue)](https://hmlendea.go.ro)
+[![License](https://img.shields.io/github/license/hmlendea/hmlendea.go.ro)](https://github.com/hmlendea/hmlendea.go.ro/blob/master/LICENSE)
 
 # Personal Presentation Website
 
@@ -7,7 +8,6 @@ My personal presentation website.
 
 ## 📑 Table of Contents
 
-- [Table of Contents](#-table-of-contents)
 - [Capabilities](#-capabilities)
 - [Use Cases](#-use-cases)
 - [Usage](#-usage)
@@ -38,7 +38,9 @@ My personal presentation website.
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
 - [Acknowledgements](#-acknowledgements)
+- [Support](#-support)
 - [Project Engagement](#-project-engagement)
+- [License](#-license)
 
 ## ✨ Capabilities
 
@@ -288,3 +290,8 @@ For support, please [open an issue](https://github.com/hmlendea/hmlendea.go.ro/i
 Discovered a problem with Personal Presentation Website or have a suggestion for it? [Open an issue](https://github.com/hmlendea/hmlendea.go.ro/issues)!
 
 If you find this project useful, consider starring ⭐️ it on GitHub!
+
+## 📄 License
+
+This project is being distributed under the `GNU General Public License v3.0` or later.
+See [LICENSE](./LICENSE) for additional information.
