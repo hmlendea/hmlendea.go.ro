@@ -1,4 +1,5 @@
 @page "/funding"
+@inject FundingSettings FundingSettings
 
 <PageTitle>Mlendea Horațiu</PageTitle>
 
@@ -62,120 +63,63 @@
             <div class="container">
                 <!-- Funding Grid Items-->
                 <div id="portfolio-gallery" class="row justify-content-center">
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- Patreon-->
-                        <a href="https://patreon.com/hmlendea">
-                            <div class="portfolio-item mx-auto" >
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">Patreon</div>
+                    @foreach (FundingChannelSettings channel in FundingSettings.Channels)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
+                            @if (channel.BankTransfer is BankTransferSettings bankTransfer)
+                            {
+                                <div class="portfolio-item mx-auto" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#@bankTransfer.ModalIdentifier">
+                                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                        <div class="portfolio-item-caption-content text-center text-white">@channel.Name</div>
+                                    </div>
+                                    <img class="img-fluid" src="@channel.Image" alt="@channel.Name" />
                                 </div>
-                                <img class="img-fluid" src="../assets/img/funding/patreon.png" alt="Patreon" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- Revolut -->
-                        <a href="https://revolut.me/iumf8">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">Revolut</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/revolut.png" alt="Revolut" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- PayPal -->
-                        <a href="https://www.paypal.com/donate?hosted_button_id=6YVRGJHDGWGKQ">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">PayPal</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/paypal.png" alt="PayPal" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- GitHub Sponsors -->
-                        <a href="https://github.com/sponsors/hmlendea">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">GitHub Sponsors</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/github.png" alt="GitHub Sponsors" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- LiberaPay -->
-                        <a href="https://liberapay.com/HMlendea/donate">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">LiberaPay</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/liberapay.png" alt="LiberaPay" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- Buy Me a Coffee-->
-                        <a href="https://www.buymeacoffee.com/hmlendea">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">Buy Me a Coffee</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/buymeacoffee.png" alt="Buy Me a Coffee" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- Ko-fi -->
-                        <a href="https://ko-fi.com/hmlendea">
-                            <div class="portfolio-item mx-auto">
-                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">Ko-fi</div>
-                                </div>
-                                <img class="img-fluid" src="../assets/img/funding/kofi.png" alt="Ko-fi" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
-                        <!-- Salt Bank -->
-                        <div class="portfolio-item mx-auto" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#modalSaltBank">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Salt Bank</div>
-                            </div>
-                            <img class="img-fluid" src="../assets/img/funding/saltbank.png" alt="Salt Bank" />
+                            }
+                            else
+                            {
+                                <a href="@channel.Url">
+                                    <div class="portfolio-item mx-auto">
+                                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                            <div class="portfolio-item-caption-content text-center text-white">@channel.Name</div>
+                                        </div>
+                                        <img class="img-fluid" src="@channel.Image" alt="@channel.Name" />
+                                    </div>
+                                </a>
+                            }
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </section>
 
-        <!-- Salt Bank Modal -->
-        <div class="modal fade" id="modalSaltBank" tabindex="-1" aria-labelledby="modalSaltBankLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalSaltBankLabel">Salt Bank — Bank Transfer</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">IBAN</dt>
-                            <dd class="col-sm-8"><code>RO05ROIN4021IORUAQ63WJ4K</code></dd>
-                            <dt class="col-sm-4">BIC / SWIFT</dt>
-                            <dd class="col-sm-8"><code>ROINROBU</code></dd>
-                        </dl>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- Bank Transfer Modals -->
+        @foreach (FundingChannelSettings channel in FundingSettings.Channels)
+        {
+            @if (channel.BankTransfer is BankTransferSettings bankTransfer)
+            {
+                <div class="modal fade" id="@bankTransfer.ModalIdentifier" tabindex="-1" aria-labelledby="@($"{bankTransfer.ModalIdentifier}Label")" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="@($"{bankTransfer.ModalIdentifier}Label")">@channel.Name</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-4">IBAN</dt>
+                                    <dd class="col-sm-8"><code>@bankTransfer.Iban</code></dd>
+                                    <dt class="col-sm-4">BIC / SWIFT</dt>
+                                    <dd class="col-sm-8"><code>@bankTransfer.Swift</code></dd>
+                                </dl>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
 
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed">

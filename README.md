@@ -111,17 +111,30 @@ After the application has started, the console reports the addresses it is liste
 
 | File | Scope | Purpose |
 |------|-------|---------|
-| `PersonalPresentationWebsite/appsettings.json` | Application | Defines the GitHub cache duration, the log levels, and the accepted host headers. |
+| `PersonalPresentationWebsite/appsettings.json` | Application | Defines the GitHub cache duration, the funding identifiers, the log levels, and the accepted host headers. |
 
 ### Settings
 
 The subsequent settings are recognised:
 | Section | Key | Type | Default | Required | Description |
 |---------|-----|------|---------|----------|-------------|
-| `GitHub` | `CacheDurationInMinutes` | `integer` | `30` | No | Number of minutes for which GitHub API responses are cached. |
-| `Logging:LogLevel` | `Default` | `string` | `Information` | No | Minimum log level for all categories. |
-| `Logging:LogLevel` | `Microsoft.AspNetCore` | `string` | `Warning` | No | Minimum log level for the ASP.NET Core categories. |
-| — | `AllowedHosts` | `string` | `*` | No | Semicolon-separated list of accepted `Host` header values. |
+| `gitHub` | `cacheDurationInMinutes` | `integer` | `30` | No | Number of minutes for which GitHub API responses are cached. |
+| `funding` | `patreonUsername` | `string` | `""` | No | Patreon account name; the channel is skipped when empty. |
+| `funding` | `revolutUsername` | `string` | `""` | No | Revolut account name; the channel is skipped when empty. |
+| `funding` | `payPalHostedButtonId` | `string` | `""` | No | PayPal hosted button identifier; the channel is skipped when empty. |
+| `funding` | `gitHubSponsorsUsername` | `string` | `""` | No | GitHub account name for sponsorships; the channel is skipped when empty. |
+| `funding` | `liberaPayUsername` | `string` | `""` | No | LiberaPay account name; the channel is skipped when empty. |
+| `funding` | `buyMeACoffeeUsername` | `string` | `""` | No | Buy Me a Coffee account name; the channel is skipped when empty. |
+| `funding` | `kofiUsername` | `string` | `""` | No | Ko-fi account name; the channel is skipped when empty. |
+| `funding:saltBank` | `iban` | `string` | `""` | No | IBAN of the Salt Bank account; the channel is skipped when empty. |
+| `funding:saltBank` | `swift` | `string` | `""` | No | SWIFT or BIC code of the Salt Bank account. |
+| `logging:logLevel` | `default` | `string` | `Information` | No | Minimum log level for all categories. |
+| `logging:logLevel` | `Microsoft.AspNetCore` | `string` | `Warning` | No | Minimum log level for the ASP.NET Core categories. |
+| — | `allowedHosts` | `string` | `*` | No | Semicolon-separated list of accepted `Host` header values. |
+
+### Key Casing
+
+Configuration keys are case-insensitive, so `patreonUsername`, `PatreonUsername`, and `PATREONUSERNAME` all bind to the same setting, and the same applies to every section and key.
 
 ### Precedence
 
@@ -133,7 +146,7 @@ Configuration is resolved through the standard ASP.NET Core providers. From high
 
 ### Reload Behaviour
 
-`GitHub:CacheDurationInMinutes` is read once while starting and determines the expiry of the output cache, so a change requires restarting the application.
+`gitHub:cacheDurationInMinutes` and the `funding` identifiers are read once while starting, so a change requires restarting the application. The cache duration additionally determines the expiry of the output cache.
 
 ### Profiles and Scopes
 
@@ -154,7 +167,9 @@ Outside the development environment the application registers the exception hand
 
 ### Validation
 
-A value below `30` for `GitHub:CacheDurationInMinutes` causes the application to throw `ArgumentOutOfRangeException` while starting, so the process refuses to run until the value is corrected.
+A value below `30` for `gitHub:cacheDurationInMinutes` causes the application to throw `ArgumentOutOfRangeException` while starting, so the process refuses to run until the value is corrected.
+
+A funding channel is rendered only when its identifier is present, so clearing or omitting an identifier removes that channel from the page. A bank transfer channel is likewise rendered only when its `Iban` is present, so additional banks can be added without displaying incomplete accounts.
 
 ## 🧩 Compatibility
 
