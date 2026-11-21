@@ -213,10 +213,10 @@ namespace PersonalPresentationWebsite.UnitTests.Components.Pages
         [
             $"https://patreon.com/{PatreonUsername}",
             $"https://revolut.me/{RevolutUsername}",
-            $"https://www.paypal.com/donate?hosted_button_id={PayPalHostedButtonId}",
+            $"https://paypal.com/donate?hosted_button_id={PayPalHostedButtonId}",
             $"https://github.com/sponsors/{GitHubSponsorsUsername}",
             $"https://liberapay.com/{LiberaPayUsername}/donate",
-            $"https://www.buymeacoffee.com/{BuyMeACoffeeUsername}",
+            $"https://buymeacoffee.com/{BuyMeACoffeeUsername}",
             $"https://ko-fi.com/{KofiUsername}"
         ];
 
