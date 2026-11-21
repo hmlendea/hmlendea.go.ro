@@ -56,7 +56,7 @@ namespace PersonalPresentationWebsite.Configuration
                 "PayPal",
                 "paypal",
                 PayPalHostedButtonId,
-                $"https://www.paypal.com/donate?hosted_button_id={PayPalHostedButtonId}"
+                $"https://paypal.com/donate?hosted_button_id={PayPalHostedButtonId}"
             );
             AddLinkedChannel(
                 channels,
@@ -77,7 +77,7 @@ namespace PersonalPresentationWebsite.Configuration
                 "Buy Me a Coffee",
                 "buymeacoffee",
                 BuyMeACoffeeUsername,
-                $"https://www.buymeacoffee.com/{BuyMeACoffeeUsername}"
+                $"https://buymeacoffee.com/{BuyMeACoffeeUsername}"
             );
             AddLinkedChannel(
                 channels,
@@ -89,16 +89,13 @@ namespace PersonalPresentationWebsite.Configuration
         }
 
         private void AddBankChannels(List<FundingChannelSettings> channels)
-        {
-            AddBankChannel(channels, "Salt Bank", "saltbank", SaltBank);
-        }
+            => AddBankChannel(channels, "Salt Bank", "saltbank", SaltBank);
 
         private static void AddBankChannel(
             List<FundingChannelSettings> channels,
             string name,
             string slug,
-            BankAccountSettings account
-        )
+            BankAccountSettings account)
         {
             if (string.IsNullOrWhiteSpace(account.Iban))
             {
