@@ -20,14 +20,14 @@ namespace PersonalPresentationWebsite
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             int cacheDurationInMinutes = builder.Configuration.GetValue<int>(
-                "GitHub:CacheDurationInMinutes",
+                "gitHub:cacheDurationInMinutes",
                 30
             );
 
             if (cacheDurationInMinutes < 30)
             {
                 throw new ArgumentOutOfRangeException(
-                    "GitHub:CacheDurationInMinutes",
+                    "gitHub:cacheDurationInMinutes",
                     "GitHub cache duration must be at least 30 minutes."
                 );
             }

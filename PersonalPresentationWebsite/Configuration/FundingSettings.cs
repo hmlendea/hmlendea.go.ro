@@ -4,7 +4,7 @@ namespace PersonalPresentationWebsite.Configuration
 {
     public sealed class FundingSettings
     {
-        public static string SectionName => "Funding";
+        public static string SectionName => "funding";
 
         public string PatreonUsername { get; set; } = string.Empty;
 
