@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using NuciWeb.HTTP;
 
 using PersonalPresentationWebsite.Components;
+using PersonalPresentationWebsite.Configuration;
 using PersonalPresentationWebsite.Endpoints;
 
 namespace PersonalPresentationWebsite
@@ -36,6 +37,13 @@ namespace PersonalPresentationWebsite
                 GitHubEndpoints.CachePolicyName,
                 policy => policy.Expire(TimeSpan.FromMinutes(cacheDurationInMinutes)).SetVaryByQuery([])
             ));
+
+            FundingSettings fundingSettings = new();
+            builder.Configuration
+                .GetSection(FundingSettings.SectionName)
+                .Bind(fundingSettings);
+            builder.Services.AddSingleton(fundingSettings);
+
             builder.Services.AddSingleton<HttpClient>(services =>
             {
                 HttpClient client = HttpClientCreator.Create();
