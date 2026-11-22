@@ -12,11 +12,13 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
     [TestFixture]
     public sealed class ProfileEndpointTests
     {
-        private const string ProfileEndpoint = "/api/github/profile";
-        private const string ProfileResource = "users/hmlendea";
-
         private PersonalPresentationWebsiteFactory factory = null!;
+
         private HttpClient client = null!;
+
+        private static string ProfileEndpoint => "/api/github/profile";
+
+        private static string ProfileResource => "users/hmlendea";
 
         [SetUp]
         public void SetUp()
@@ -84,7 +86,9 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
         [Test]
         public async Task GivenTheProfileEndpoint_WhenRequestingItTwice_ThenGitHubIsQueriedOnce()
         {
-            factory.GitHubHandler.EnqueueJsonResponse(ProfileResource, """{"login":"hmlendea"}""");
+            factory.GitHubHandler.EnqueueJsonResponse(
+                ProfileResource,
+                """{"login":"hmlendea"}""");
 
             using HttpResponseMessage firstResponse = await client.GetAsync(ProfileEndpoint);
             using HttpResponseMessage secondResponse = await client.GetAsync(ProfileEndpoint);
@@ -98,10 +102,18 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
             });
         }
 
-        [TestCase("/api/github/pull-requests", "search/issues?q=author:hmlendea+type:pr&per_page=1")]
-        [TestCase("/api/github/issues", "search/issues?q=author:hmlendea+type:issue&per_page=1")]
-        [TestCase("/api/github/commits", "search/commits?q=author:hmlendea&per_page=1")]
-        public async Task GivenASearchEndpoint_WhenGitHubReturnsTotals_ThenTheyAreProxied(string endpoint, string resource)
+        [TestCase(
+            "/api/github/pull-requests",
+            "search/issues?q=author:hmlendea+type:pr&per_page=1")]
+        [TestCase(
+            "/api/github/issues",
+            "search/issues?q=author:hmlendea+type:issue&per_page=1")]
+        [TestCase(
+            "/api/github/commits",
+            "search/commits?q=author:hmlendea&per_page=1")]
+        public async Task GivenASearchEndpoint_WhenGitHubReturnsTotals_ThenTheyAreProxied(
+            string endpoint,
+            string resource)
         {
             factory.GitHubHandler.EnqueueJsonResponse(resource, """{"total_count":42}""");
 

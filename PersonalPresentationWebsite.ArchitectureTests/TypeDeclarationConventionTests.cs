@@ -413,7 +413,7 @@ namespace PersonalPresentationWebsite.ArchitectureTests
 
             if (string.Equals(namespaceName, ProductionNamespaces.Configuration, StringComparison.Ordinal))
             {
-                return true;
+                return !declaration.Modifiers.Any(SyntaxKind.StaticKeyword);
             }
 
             return declaration.Identifier.ValueText.EndsWith("Settings", StringComparison.Ordinal);

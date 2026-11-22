@@ -12,20 +12,44 @@ namespace PersonalPresentationWebsite.IntegrationTests.Configuration
     [TestFixture]
     public sealed class FundingConfigurationBindingTests
     {
-        private static readonly string[] PatreonKeyVariants =
+        private static readonly string[] patreonKeyVariants =
         [
             "patreonUsername", "PatreonUsername", "PATREONUSERNAME"
         ];
 
-        private static readonly string[] KoftKeyVariants =
+        private static readonly string[] kofiKeyVariants =
         [
             "kofiUsername", "KofiUsername", "KOFIUSERNAME"
         ];
 
-        private static readonly string[] IbanKeyVariants =
+        private static readonly string[] ibanKeyVariants =
         [
             "saltBank:iban", "SaltBank:Iban", "SALTBANK:IBAN"
         ];
+
+        private static readonly string[] derivedChannelNames =
+        [
+            FundingChannelNames.Patreon, FundingChannelNames.KoFi, FundingChannelNames.SaltBank
+        ];
+
+        private static readonly string[] linkedChannelNames =
+        [
+            FundingChannelNames.Patreon, FundingChannelNames.SaltBank
+        ];
+
+        private static IEnumerable<TestCaseData> CasingVariants
+        {
+            get
+            {
+                for (int index = 0; index < patreonKeyVariants.Length; index += 1)
+                {
+                    yield return new TestCaseData(
+                        patreonKeyVariants[index],
+                        kofiKeyVariants[index],
+                        ibanKeyVariants[index]);
+                }
+            }
+        }
 
         [TestCaseSource(nameof(CasingVariants))]
         public void GivenFundingIdentifiersInAnyCasing_WhenBinding_ThenEveryChannelIsDerived(
@@ -48,7 +72,7 @@ namespace PersonalPresentationWebsite.IntegrationTests.Configuration
                     Is.EqualTo("RO49AAAA1B31007593840000"));
                 Assert.That(
                     fundingSettings.Channels.Select(channel => channel.Name),
-                    Is.EqualTo(new[] { "Patreon", "Ko-fi", "Salt Bank" }));
+                    Is.EqualTo(derivedChannelNames));
             });
         }
 
@@ -65,7 +89,7 @@ namespace PersonalPresentationWebsite.IntegrationTests.Configuration
                 .Build();
 
             Assert.That(
-                configuration.GetValue<int>("gitHub:cacheDurationInMinutes", 30),
+                configuration.GetValue<int>(GitHubSettingsKeys.CacheDurationInMinutes, 30),
                 Is.EqualTo(45));
         }
 
@@ -81,28 +105,20 @@ namespace PersonalPresentationWebsite.IntegrationTests.Configuration
 
             Assert.That(
                 fundingSettings.Channels.Select(channel => channel.Name),
-                Is.EqualTo(new[] { "Patreon", "Salt Bank" }));
-        }
-
-        private static IEnumerable<TestCaseData> CasingVariants
-        {
-            get
-            {
-                for (int index = 0; index < PatreonKeyVariants.Length; index += 1)
-                {
-                    yield return new TestCaseData(
-                        PatreonKeyVariants[index],
-                        KoftKeyVariants[index],
-                        IbanKeyVariants[index]);
-                }
-            }
+                Is.EqualTo(linkedChannelNames));
         }
 
         private static FundingSettings BindFundingSettings(
             string patreonKey,
             string kofiKey,
+            string ibanKey)
+            => BindFundingSettings(patreonKey, kofiKey, ibanKey, "zezima");
+
+        private static FundingSettings BindFundingSettings(
+            string patreonKey,
+            string kofiKey,
             string ibanKey,
-            string kofiUsername = "zezima")
+            string kofiUsername)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(

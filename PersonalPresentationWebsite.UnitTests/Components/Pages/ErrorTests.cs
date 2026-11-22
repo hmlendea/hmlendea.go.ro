@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 
-using Bunit;
-
 using Microsoft.AspNetCore.Http;
+
+using Bunit;
 
 using NUnit.Framework;
 

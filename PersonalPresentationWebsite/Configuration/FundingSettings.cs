@@ -26,114 +26,96 @@ namespace PersonalPresentationWebsite.Configuration
             => BuildChannels();
 
         private IEnumerable<FundingChannelSettings> BuildChannels()
-        {
-            List<FundingChannelSettings> channels = [];
+            => [.. LinkedChannels(), .. BankChannels()];
 
-            AddLinkedChannels(channels);
-            AddBankChannels(channels);
+        private IEnumerable<FundingChannelSettings> LinkedChannels()
+            => [
+                .. LinkedChannel(
+                    FundingChannelNames.Patreon,
+                    "patreon",
+                    PatreonUsername,
+                    $"https://patreon.com/{PatreonUsername}"),
+                .. LinkedChannel(
+                    FundingChannelNames.Revolut,
+                    "revolut",
+                    RevolutUsername,
+                    $"https://revolut.me/{RevolutUsername}"),
+                .. LinkedChannel(
+                    FundingChannelNames.PayPal,
+                    "paypal",
+                    PayPalHostedButtonId,
+                    $"https://paypal.com/donate?hosted_button_id={PayPalHostedButtonId}"),
+                .. LinkedChannel(
+                    FundingChannelNames.GitHubSponsors,
+                    "github",
+                    GitHubSponsorsUsername,
+                    $"https://github.com/sponsors/{GitHubSponsorsUsername}"),
+                .. LinkedChannel(
+                    FundingChannelNames.LiberaPay,
+                    "liberapay",
+                    LiberaPayUsername,
+                    $"https://liberapay.com/{LiberaPayUsername}/donate"),
+                .. LinkedChannel(
+                    FundingChannelNames.BuyMeACoffee,
+                    "buymeacoffee",
+                    BuyMeACoffeeUsername,
+                    $"https://buymeacoffee.com/{BuyMeACoffeeUsername}"),
+                .. LinkedChannel(
+                    FundingChannelNames.KoFi,
+                    "kofi",
+                    KofiUsername,
+                    $"https://ko-fi.com/{KofiUsername}")
+            ];
 
-            return channels;
-        }
+        private IEnumerable<FundingChannelSettings> BankChannels()
+            => BankChannel(FundingChannelNames.SaltBank, "saltbank", SaltBank);
 
-        private void AddLinkedChannels(List<FundingChannelSettings> channels)
-        {
-            AddLinkedChannel(
-                channels,
-                "Patreon",
-                "patreon",
-                PatreonUsername,
-                $"https://patreon.com/{PatreonUsername}"
-            );
-            AddLinkedChannel(
-                channels,
-                "Revolut",
-                "revolut",
-                RevolutUsername,
-                $"https://revolut.me/{RevolutUsername}"
-            );
-            AddLinkedChannel(
-                channels,
-                "PayPal",
-                "paypal",
-                PayPalHostedButtonId,
-                $"https://paypal.com/donate?hosted_button_id={PayPalHostedButtonId}"
-            );
-            AddLinkedChannel(
-                channels,
-                "GitHub Sponsors",
-                "github",
-                GitHubSponsorsUsername,
-                $"https://github.com/sponsors/{GitHubSponsorsUsername}"
-            );
-            AddLinkedChannel(
-                channels,
-                "LiberaPay",
-                "liberapay",
-                LiberaPayUsername,
-                $"https://liberapay.com/{LiberaPayUsername}/donate"
-            );
-            AddLinkedChannel(
-                channels,
-                "Buy Me a Coffee",
-                "buymeacoffee",
-                BuyMeACoffeeUsername,
-                $"https://buymeacoffee.com/{BuyMeACoffeeUsername}"
-            );
-            AddLinkedChannel(
-                channels,
-                "Ko-fi",
-                "kofi",
-                KofiUsername,
-                $"https://ko-fi.com/{KofiUsername}"
-            );
-        }
-
-        private void AddBankChannels(List<FundingChannelSettings> channels)
-            => AddBankChannel(channels, "Salt Bank", "saltbank", SaltBank);
-
-        private static void AddBankChannel(
-            List<FundingChannelSettings> channels,
+        private static IEnumerable<FundingChannelSettings> BankChannel(
             string name,
             string slug,
             BankAccountSettings account)
         {
             if (string.IsNullOrWhiteSpace(account.Iban))
             {
-                return;
+                return [];
             }
 
-            channels.Add(new FundingChannelSettings
-            {
-                Name = name,
-                Image = ImagePathFor(slug),
-                BankTransfer = new BankTransferSettings
+            return
+            [
+                new FundingChannelSettings
                 {
-                    ModalIdentifier = $"modal-{slug}",
-                    Iban = account.Iban,
-                    Swift = account.Swift
+                    Name = name,
+                    Image = ImagePathFor(slug),
+                    BankTransfer = new BankTransferSettings
+                    {
+                        ModalId = $"modal-{slug}",
+                        Iban = account.Iban,
+                        Swift = account.Swift
+                    }
                 }
-            });
+            ];
         }
 
-        private static void AddLinkedChannel(
-            List<FundingChannelSettings> channels,
+        private static IEnumerable<FundingChannelSettings> LinkedChannel(
             string name,
             string slug,
             string identifier,
-            string url
-        )
+            string url)
         {
             if (string.IsNullOrWhiteSpace(identifier))
             {
-                return;
+                return [];
             }
 
-            channels.Add(new FundingChannelSettings
-            {
-                Name = name,
-                Image = ImagePathFor(slug),
-                Url = url
-            });
+            return
+            [
+                new FundingChannelSettings
+                {
+                    Name = name,
+                    Image = ImagePathFor(slug),
+                    Url = url
+                }
+            ];
         }
 
         private static string ImagePathFor(string slug)

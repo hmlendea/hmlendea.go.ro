@@ -144,21 +144,19 @@ namespace PersonalPresentationWebsite.ArchitectureTests
             {
                 foreach (MethodDeclarationSyntax method in file.Root.DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
-                    if (method.Identifier.ValueText is not ("MapResource" or "GetRepositoryTotalsAsync"))
+                    string methodText = method.ToString();
+
+                    if (!methodText.Contains("GetAsync(", StringComparison.Ordinal))
                     {
                         continue;
                     }
 
-                    string body = method.Body?.ToString() ?? string.Empty;
-
-                    if (!body.Contains("Status503ServiceUnavailable", StringComparison.Ordinal))
+                    if (!methodText.Contains("Status503ServiceUnavailable", StringComparison.Ordinal))
                     {
                         violations.Add(SyntaxInspections.Describe(file, method, $"handler '{method.Identifier.ValueText}' must map upstream failure to 503 Service Unavailable."));
                     }
 
-                    bool addressesMissingResource = method.Identifier.ValueText == "MapResource";
-
-                    if (addressesMissingResource && !body.Contains("NotFound", StringComparison.Ordinal))
+                    if (!methodText.Contains("NotFound", StringComparison.Ordinal))
                     {
                         violations.Add(SyntaxInspections.Describe(file, method, $"handler '{method.Identifier.ValueText}' must map a missing upstream resource explicitly."));
                     }

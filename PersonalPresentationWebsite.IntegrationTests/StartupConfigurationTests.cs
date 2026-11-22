@@ -2,6 +2,8 @@ using System;
 
 using NUnit.Framework;
 
+using PersonalPresentationWebsite.Configuration;
+
 namespace PersonalPresentationWebsite.IntegrationTests
 {
     [TestFixture]
@@ -19,11 +21,13 @@ namespace PersonalPresentationWebsite.IntegrationTests
         {
             string[] arguments = [$"--{configurationKey}={cacheDurationInMinutes}"];
 
+            string paramNameProperty = nameof(ArgumentOutOfRangeException.ParamName);
+
             Assert.That(
                 () => Program.Main(arguments),
                 Throws.TypeOf<ArgumentOutOfRangeException>()
-                    .With.Property(nameof(ArgumentOutOfRangeException.ParamName))
-                    .EqualTo("gitHub:cacheDurationInMinutes"));
+                    .With.Property(paramNameProperty)
+                    .EqualTo(GitHubSettingsKeys.CacheDurationInMinutes));
         }
     }
 }

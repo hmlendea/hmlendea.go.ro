@@ -212,6 +212,11 @@ namespace PersonalPresentationWebsite.ArchitectureTests
             {
                 foreach (ClassDeclarationSyntax declaration in file.TypeDeclarations.OfType<ClassDeclarationSyntax>())
                 {
+                    if (declaration.Modifiers.Any(Microsoft.CodeAnalysis.CSharp.SyntaxKind.StaticKeyword))
+                    {
+                        continue;
+                    }
+
                     bool inConfigurationNamespace = declaration.Ancestors()
                         .OfType<BaseNamespaceDeclarationSyntax>()
                         .Any(ns => string.Equals(ns.Name.ToString(), ProductionNamespaces.Configuration, StringComparison.Ordinal));

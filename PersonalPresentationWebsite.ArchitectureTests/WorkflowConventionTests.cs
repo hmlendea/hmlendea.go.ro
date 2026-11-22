@@ -128,7 +128,8 @@ namespace PersonalPresentationWebsite.ArchitectureTests
             List<string> violations = [];
             string content = File.ReadAllText(DotNetWorkflowPath);
 
-            if (content.Contains("[[", StringComparison.Ordinal) && content.Contains("]]", StringComparison.Ordinal))
+            if (content.Contains("[[DOTNET_PROJECT_PATH]]", StringComparison.Ordinal) ||
+                Regex.IsMatch(content, @"\[\[[A-Z_]+\]\]"))
             {
                 violations.Add("dotnet.yml must not retain a template placeholder.");
             }

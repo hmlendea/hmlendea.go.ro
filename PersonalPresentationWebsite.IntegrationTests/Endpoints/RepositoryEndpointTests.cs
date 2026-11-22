@@ -12,14 +12,19 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
     [TestFixture]
     public sealed class RepositoryEndpointTests
     {
-        private const string Repository = "narivia";
-        private const string RepositoryEndpoint = "/api/github/repos/hmlendea/narivia";
-        private const string RepositoryResource = "repos/hmlendea/narivia";
-        private const string LatestReleaseEndpoint = "/api/github/repos/hmlendea/narivia/releases/latest";
-        private const string LatestReleaseResource = "repos/hmlendea/narivia/releases/latest";
-
         private PersonalPresentationWebsiteFactory factory = null!;
+
         private HttpClient client = null!;
+
+        private static string Repository => "narivia";
+
+        private static string RepositoryEndpoint => "/api/github/repos/hmlendea/narivia";
+
+        private static string RepositoryResource => "repos/hmlendea/narivia";
+
+        private static string LatestReleaseEndpoint => "/api/github/repos/hmlendea/narivia/releases/latest";
+
+        private static string LatestReleaseResource => "repos/hmlendea/narivia/releases/latest";
 
         [SetUp]
         public void SetUp()
@@ -75,7 +80,9 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
         [Test]
         public async Task GivenARepositoryWithoutReleases_WhenRequestingTheLatestRelease_ThenAnEmptyPayloadIsReturned()
         {
-            factory.GitHubHandler.EnqueueResponse(LatestReleaseResource, HttpStatusCode.NotFound);
+            factory.GitHubHandler.EnqueueResponse(
+                LatestReleaseResource,
+                HttpStatusCode.NotFound);
 
             using HttpResponseMessage response = await client.GetAsync(LatestReleaseEndpoint);
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -90,7 +97,9 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
         [Test]
         public async Task GivenTheRepositoryEndpoint_WhenGitHubIsUnavailable_ThenServiceUnavailableIsReturned()
         {
-            factory.GitHubHandler.EnqueueResponse(RepositoryResource, HttpStatusCode.BadGateway);
+            factory.GitHubHandler.EnqueueResponse(
+                RepositoryResource,
+                HttpStatusCode.BadGateway);
 
             using HttpResponseMessage response = await client.GetAsync(RepositoryEndpoint);
 

@@ -32,8 +32,14 @@ namespace PersonalPresentationWebsite.Endpoints
         public static void MapGitHubEndpoints(this WebApplication application)
         {
             MapResource(application, "profile", "users/hmlendea");
-            MapResource(application, "pull-requests", "search/issues?q=author:hmlendea+type:pr&per_page=1");
-            MapResource(application, "issues", "search/issues?q=author:hmlendea+type:issue&per_page=1");
+            MapResource(
+                application,
+                "pull-requests",
+                "search/issues?q=author:hmlendea+type:pr&per_page=1");
+            MapResource(
+                application,
+                "issues",
+                "search/issues?q=author:hmlendea+type:issue&per_page=1");
             MapResource(application, "commits", "search/commits?q=author:hmlendea&per_page=1");
             application.MapGet("/api/github/repository-totals", GetRepositoryTotalsAsync)
                 .CacheOutput(CachePolicyName);
@@ -41,31 +47,43 @@ namespace PersonalPresentationWebsite.Endpoints
             foreach (string repository in Repositories)
             {
                 string resource = $"repos/hmlendea/{repository}";
+                string latestReleaseResource = $"{resource}/releases/latest";
+
                 MapResource(application, resource, resource);
-                MapResource(application, $"{resource}/releases/latest", $"{resource}/releases/latest");
+                MapResource(application, latestReleaseResource, latestReleaseResource);
             }
         }
 
-        private static void MapResource(WebApplication application, string route, string resource)
+        private static void MapResource(
+            WebApplication application,
+            string route,
+            string resource)
+            => application.MapGet(
+                $"/api/github/{route}",
+                (HttpClient client) => ProxyResourceAsync(client, resource))
+                .CacheOutput(CachePolicyName);
+
+        private static async Task<IResult> ProxyResourceAsync(
+            HttpClient client,
+            string resource)
         {
-            application.MapGet($"/api/github/{route}", async (HttpClient client) =>
+            using HttpResponseMessage response = await client.GetAsync(resource);
+
+            if (response.StatusCode is HttpStatusCode.NotFound)
             {
-                using HttpResponseMessage response = await client.GetAsync(resource);
+                return Results.Json((object?)null);
+            }
 
-                if (response.StatusCode is HttpStatusCode.NotFound)
-                {
-                    return Results.Json((object?)null);
-                }
+            if (!response.IsSuccessStatusCode)
+            {
+                return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
-                }
+            string responseBody = await response.Content.ReadAsStringAsync();
 
-                using JsonDocument document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+            using JsonDocument document = JsonDocument.Parse(responseBody);
 
-                return Results.Json(document.RootElement.Clone());
-            }).CacheOutput(CachePolicyName);
+            return Results.Json(document.RootElement.Clone());
         }
 
         private static async Task<IResult> GetRepositoryTotalsAsync(HttpClient client)
@@ -81,12 +99,19 @@ namespace PersonalPresentationWebsite.Endpoints
                 string resource = $"users/hmlendea/repos?per_page={RepositoryPageSize}&page={pageNumber}";
                 using HttpResponseMessage response = await client.GetAsync(resource);
 
+                if (response.StatusCode is HttpStatusCode.NotFound)
+                {
+                    return Results.Json(new { stars, forks });
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
                 }
 
-                using JsonDocument document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                using JsonDocument document = JsonDocument.Parse(responseBody);
                 repositoryCount = document.RootElement.GetArrayLength();
 
                 foreach (JsonElement repository in document.RootElement.EnumerateArray())

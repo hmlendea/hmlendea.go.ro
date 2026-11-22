@@ -9,12 +9,12 @@ namespace PersonalPresentationWebsite.IntegrationTests.Infrastructure
 {
     internal sealed class StubHttpMessageHandler : HttpMessageHandler
     {
-        private const string JsonMediaType = "application/json";
-
         private readonly Dictionary<string, Queue<HttpResponseMessage>> responsesByResource = [];
         private readonly List<string> requestedResources = [];
 
         internal IReadOnlyList<string> RequestedResources => requestedResources;
+
+        private static string JsonMediaType => "application/json";
 
         internal void EnqueueJsonResponse(string resource, string content)
             => EnqueueResponse(
@@ -34,13 +34,17 @@ namespace PersonalPresentationWebsite.IntegrationTests.Infrastructure
 
         internal void EnqueueResponse(string resource, HttpResponseMessage response)
         {
-            if (!responsesByResource.TryGetValue(resource, out Queue<HttpResponseMessage>? responses))
+            bool wasEnqueued = responsesByResource.TryGetValue(
+                resource,
+                out Queue<HttpResponseMessage>? responses);
+
+            if (!wasEnqueued)
             {
                 responses = new Queue<HttpResponseMessage>();
                 responsesByResource.Add(resource, responses);
             }
 
-            responses.Enqueue(response);
+            responses!.Enqueue(response);
         }
 
         protected override Task<HttpResponseMessage> SendAsync(
@@ -50,10 +54,14 @@ namespace PersonalPresentationWebsite.IntegrationTests.Infrastructure
             string resource = request.RequestUri!.PathAndQuery.TrimStart('/');
             requestedResources.Add(resource);
 
-            if (responsesByResource.TryGetValue(resource, out Queue<HttpResponseMessage>? responses) &&
-                responses.Count > 0)
+            bool wasEnqueued = responsesByResource.TryGetValue(
+                resource,
+                out Queue<HttpResponseMessage>? responses) &&
+                responses.Count > 0;
+
+            if (wasEnqueued)
             {
-                return Task.FromResult(responses.Dequeue());
+                return Task.FromResult(responses!.Dequeue());
             }
 
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound));

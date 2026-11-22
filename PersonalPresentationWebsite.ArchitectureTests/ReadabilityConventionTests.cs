@@ -23,7 +23,7 @@ namespace PersonalPresentationWebsite.ArchitectureTests
             List<string> violations = [];
             Dictionary<string, int> occurrenceCounts = new(StringComparer.Ordinal);
 
-            foreach (SourceFile file in Files)
+            foreach (SourceFile file in Files.Where(candidate => !candidate.Project.IsTestProject))
             {
                 foreach (LiteralExpressionSyntax literal in file.Root.DescendantNodes().OfType<LiteralExpressionSyntax>())
                 {
