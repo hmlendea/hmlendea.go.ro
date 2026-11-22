@@ -13,12 +13,12 @@ namespace PersonalPresentationWebsite.UnitTests.Components.Pages
     [TestFixture]
     public sealed class HomeTests
     {
-        private static readonly string[] SectionIdentifiers =
+        private static readonly string[] sectionIdentifiers =
         [
             "#impact", "#about", "#portfolio", "#skills", "#timeline", "#contact"
         ];
 
-        private static readonly string[] ImpactFigureIdentifiers =
+        private static readonly string[] impactFigureIdentifiers =
         [
             "#impact-stars", "#impact-followers", "#impact-repos", "#impact-forks",
             "#impact-prs", "#impact-issues", "#impact-commits"
@@ -39,7 +39,7 @@ namespace PersonalPresentationWebsite.UnitTests.Components.Pages
 
             Assert.That(component.FindAll("section.page-section"), Has.Count.EqualTo(6));
 
-            foreach (string sectionIdentifier in SectionIdentifiers)
+            foreach (string sectionIdentifier in sectionIdentifiers)
             {
                 Assert.That(component.Find(sectionIdentifier), Is.Not.Null);
             }
@@ -52,7 +52,7 @@ namespace PersonalPresentationWebsite.UnitTests.Components.Pages
 
             Assert.That(component.FindAll("#mainNav .nav-link"), Has.Count.EqualTo(6));
 
-            foreach (string sectionIdentifier in SectionIdentifiers)
+            foreach (string sectionIdentifier in sectionIdentifiers)
             {
                 Assert.That(
                     component.Find($"#mainNav .nav-link[href='{sectionIdentifier}']"),
@@ -65,7 +65,7 @@ namespace PersonalPresentationWebsite.UnitTests.Components.Pages
         {
             IRenderedComponent<Home> component = testContext.Render<Home>();
 
-            foreach (string figureIdentifier in ImpactFigureIdentifiers)
+            foreach (string figureIdentifier in impactFigureIdentifiers)
             {
                 Assert.That(component.Find(figureIdentifier).TextContent.Trim(), Is.EqualTo("—"));
             }

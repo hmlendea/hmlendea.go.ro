@@ -13,10 +13,11 @@ namespace PersonalPresentationWebsite.IntegrationTests.Endpoints
     [TestFixture]
     public sealed class RepositoryTotalsEndpointTests
     {
-        private const string TotalsEndpoint = "/api/github/repository-totals";
-
         private PersonalPresentationWebsiteFactory factory = null!;
+
         private HttpClient client = null!;
+
+        private static string TotalsEndpoint => "/api/github/repository-totals";
 
         [SetUp]
         public void SetUp()

@@ -68,7 +68,7 @@
                         <div class="col-md-6 col-lg-4 mb-5 wow animate__animated animate__bounceIn">
                             @if (channel.BankTransfer is BankTransferSettings bankTransfer)
                             {
-                                <div class="portfolio-item mx-auto" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#@bankTransfer.ModalIdentifier">
+                                <div class="portfolio-item mx-auto funding-bank-trigger" data-bs-toggle="modal" data-bs-target="#@bankTransfer.ModalId">
                                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                         <div class="portfolio-item-caption-content text-center text-white">@channel.Name</div>
                                     </div>
@@ -97,11 +97,11 @@
         {
             @if (channel.BankTransfer is BankTransferSettings bankTransfer)
             {
-                <div class="modal fade" id="@bankTransfer.ModalIdentifier" tabindex="-1" aria-labelledby="@($"{bankTransfer.ModalIdentifier}Label")" aria-hidden="true">
+                <div class="modal fade" id="@bankTransfer.ModalId" tabindex="-1" aria-labelledby="@($"{bankTransfer.ModalId}Label")" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="@($"{bankTransfer.ModalIdentifier}Label")">@channel.Name</h5>
+                                <h5 class="modal-title" id="@($"{bankTransfer.ModalId}Label")">@channel.Name</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">

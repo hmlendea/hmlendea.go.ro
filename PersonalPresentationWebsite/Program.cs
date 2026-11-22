@@ -16,22 +16,39 @@ namespace PersonalPresentationWebsite
 {
     public static class Program
     {
+        private static int MinimumCacheDurationInMinutes => 30;
+
+        private static int DefaultCacheDurationInMinutes => 30;
+
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             int cacheDurationInMinutes = builder.Configuration.GetValue<int>(
-                "gitHub:cacheDurationInMinutes",
-                30
+                GitHubSettingsKeys.CacheDurationInMinutes,
+                DefaultCacheDurationInMinutes
             );
 
-            if (cacheDurationInMinutes < 30)
+            if (cacheDurationInMinutes < MinimumCacheDurationInMinutes)
             {
                 throw new ArgumentOutOfRangeException(
-                    "gitHub:cacheDurationInMinutes",
+                    GitHubSettingsKeys.CacheDurationInMinutes,
                     "GitHub cache duration must be at least 30 minutes."
                 );
             }
 
+            RegisterServices(builder, cacheDurationInMinutes);
+
+            WebApplication app = builder.Build();
+
+            ConfigurePipeline(app);
+
+            app.Run();
+        }
+
+        private static void RegisterServices(
+            WebApplicationBuilder builder,
+            int cacheDurationInMinutes)
+        {
             builder.Services.AddRazorComponents();
             builder.Services.AddOutputCache(options => options.AddPolicy(
                 GitHubEndpoints.CachePolicyName,
@@ -53,12 +70,13 @@ namespace PersonalPresentationWebsite
 
                 return client;
             });
+        }
 
-            WebApplication app = builder.Build();
-
+        private static void ConfigurePipeline(WebApplication app)
+        {
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
 
@@ -70,8 +88,6 @@ namespace PersonalPresentationWebsite
             app.MapGitHubEndpoints();
             app.MapStaticAssets();
             app.MapRazorComponents<App>();
-
-            app.Run();
         }
     }
 }

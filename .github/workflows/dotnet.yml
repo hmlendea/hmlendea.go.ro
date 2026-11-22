@@ -14,10 +14,23 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
+    - name: Determine the .NET version
+      id: dotnet
+      run: |
+        TARGET_FRAMEWORK="$(sed -n 's|.*<TargetFramework>\(.*\)</TargetFramework>.*|\1|p' PersonalPresentationWebsite/PersonalPresentationWebsite.csproj | head -n 1)"
+
+        if [[ -z "${TARGET_FRAMEWORK}" ]]; then
+          echo 'ERROR: Could not determine the target framework from PersonalPresentationWebsite/PersonalPresentationWebsite.csproj.' >&2
+          exit 1
+        fi
+
+        DOTNET_VERSION="${TARGET_FRAMEWORK#net}"
+        echo "version=${DOTNET_VERSION}" >> "$GITHUB_OUTPUT"
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: ${{ steps.dotnet.outputs.version }}.x
 
     - name: Restore dependencies
       run: dotnet restore

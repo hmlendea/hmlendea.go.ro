@@ -54,7 +54,7 @@ My personal presentation website.
 - **Funding overview:** a dedicated page that gathers the supported channels for funding the work.
 - **Discoverability:** publishes canonical links, Open Graph and Twitter metadata, `robots.txt`, and `sitemap.xml`.
 - **Responsive presentation:** adapts to desktop and mobile viewports, with animated reveals while scrolling.
-- **Legacy URL support:** redirects `/resume` to the hosted resume document and `/fund.html` to the funding page.
+- **Legacy URL support:** redirects `/fund.html` to the funding page.
 
 ## 🎯 Use Cases
 
@@ -308,7 +308,7 @@ The repository hosts the ASP.NET Core project, its unit and integration test pro
 | `PersonalPresentationWebsite/Components/` | Razor components, where `App.razor` is the HTML document, `Routes.razor` the router, and `Pages/` the individual pages. |
 | `PersonalPresentationWebsite/Endpoints/` | Minimal API endpoints that proxy the GitHub REST API. |
 | `PersonalPresentationWebsite/Properties/` | Launch profiles used during local development. |
-| `PersonalPresentationWebsite/wwwroot/` | Static assets: stylesheets, scripts, images, `robots.txt`, `sitemap.xml`, and the resume redirect. |
+| `PersonalPresentationWebsite/wwwroot/` | Static assets: stylesheets, scripts, images, `robots.txt`, and `sitemap.xml`. |
 | `PersonalPresentationWebsite/wwwroot/assets/img/funding/` | Logos of the supported funding platforms. |
 | `PersonalPresentationWebsite/wwwroot/css/` | Custom stylesheets layered on top of the theme. |
 | `PersonalPresentationWebsite/wwwroot/js/` | Progressive-enhancement scripts for filtering, popups, typewriter, and animation. |

@@ -13,11 +13,11 @@ namespace PersonalPresentationWebsite.IntegrationTests.Infrastructure
 {
     internal sealed class PersonalPresentationWebsiteFactory : WebApplicationFactory<App>
     {
-        private static string EnvironmentName => "IntegrationTesting";
-
         private readonly StubHttpMessageHandler gitHubHandler = new();
 
         internal StubHttpMessageHandler GitHubHandler => gitHubHandler;
+
+        private static string EnvironmentName => "IntegrationTesting";
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
