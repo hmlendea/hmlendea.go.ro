@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="PersonalPresentationWebsite/PersonalPresentationWebsite.csproj" />
+  <Project Path="PersonalPresentationWebsite.ArchitectureTests/PersonalPresentationWebsite.ArchitectureTests.csproj" />
   <Project Path="PersonalPresentationWebsite.IntegrationTests/PersonalPresentationWebsite.IntegrationTests.csproj" />
   <Project Path="PersonalPresentationWebsite.UnitTests/PersonalPresentationWebsite.UnitTests.csproj" />
 </Solution>
